@@ -17,7 +17,13 @@
 				</a>
 			</div>
 			<div class="col-md-1">
-
+        <div class="col-0.5" [ngSwitch]="id">
+          <template ngSwitchCase="1"><i class="fas fa-plus"></i></template>
+          <template ngSwitchCase="2"><i class="fas fa-minus"></i></template>
+          <template ngSwitchCase="3"><i class="fas fa-times"></i></template>
+          <template ngSwitchCase="4"><i class="fas fa-divide"></i></template>
+          <template ngSwitchCase="4"><i class="fas fa-percent"></i></template>
+        </div>`
 			</div>
 		</div>
 	</div>
