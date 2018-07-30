@@ -1,0 +1,40 @@
+<!-- Side Navbar -->
+<nav class="side-navbar">
+	<div class="side-navbar-wrapper">
+		<!-- Sidebar Header    -->
+		<div class="sidenav-header d-flex align-items-center justify-content-center">
+			<!-- Company Info-->
+			<div class="sidenav-header-inner text-center">
+				<!-- <img src="img/avatar-1.jpg" alt="person" class="img-fluid rounded-circle"> -->
+				<h2 class="h5">
+					Smart Calculator
+				</h2>
+			</div>
+			<!-- Small Brand information, appears on minimized sidebar-->
+			<div class="sidenav-header-logo">
+				<a href="index.html" class="brand-small text-center"> 
+          <strong>S</strong>
+          <strong class="text-primary">C</strong>
+        </a>
+			</div>
+		</div>
+		<!-- Sidebar Navigation Menus-->
+		<div class="main-menu">
+			<h5 class="sidenav-heading">Numeric Operations</h5>
+			<ul id="side-main-menu" class="side-menu list-unstyled">
+				<li>
+					<a [routerLink] = "['/operation', 1]"> <i class="fas fa-plus"></i>Addition</a>
+				</li>
+				<li>
+					<a [routerLink] = "['/operation', 2]"> <i class="fas fa-minus"></i>Substaction</a>
+				</li>
+				<li>
+					<a [routerLink] = "['/operation', 3]"> <i class="fas fa-times"></i>Multiplication</a>
+				</li>
+				<li>
+					<a [routerLink] = "['/operation', 4]"> <i class="fas fa-divide"></i>Division</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

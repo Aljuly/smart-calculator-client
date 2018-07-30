@@ -1,0 +1,100 @@
+/*
+* ==========================================================
+*     GENERAL
+* ==========================================================
+*/
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-small {
+  font-size: 0.9rem;
+}
+
+.text-xsmall {
+  font-size: 0.8rem;
+}
+
+.text-gray {
+  color: #868e96;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+i {
+  display: inline-block;
+}
+
+span {
+  display: inline-block;
+}
+
+.mt-30px {
+  margin-top: 30px !important;
+}
+
+.mb-30px {
+  margin-bottom: 30px !important;
+}
+
+i[class*="icon-"] {
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);
+}
+
+table {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transition: width 0.3s linear;
+  transition: width 0.3s linear;
+  width: calc(100% - 200px);
+  background-color: #f4f7fa;
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+.page.active {
+  width: calc(100% - 70px);
+}
+
+h2 {
+  color: #555;
+  font-weight: 400;
+}
+
+.display {
+  font-weight: 400 !important;
+}
+
+.section-padding {
+  padding: 0;
+}
+
+section header {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .container-fluid {
+    padding: 0 3rem;
+  }
+}
