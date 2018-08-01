@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../service/data.service';
+import { DataService } from '../../_services/data.service';
 import {DefboardComponent} from './defboard/defboard.component';
 import {InputBoardComponent} from './inputboard/inputboard.component';
 
