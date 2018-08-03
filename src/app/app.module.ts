@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -28,6 +28,7 @@ import { RegisterComponent } from './register';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule
   ],
@@ -42,7 +43,6 @@ import { RegisterComponent } from './register';
     InputBoardComponent,
     ResultComponent,
     LoginComponent,
-    AuthenticationService,
     RegisterComponent,
     AlertComponent,
     LoginComponent
