@@ -1,8 +1,8 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../_services/data.service';
-import {DefboardComponent} from './defboard/defboard.component';
-import {InputBoardComponent} from './inputboard/inputboard.component';
+import { DefboardComponent } from './defboard/defboard.component';
+import { InputBoardComponent } from './inputboard/inputboard.component';
 
 @Component({
   selector: 'app-section',
@@ -29,7 +29,7 @@ export class SectionComponent implements OnInit, OnDestroy {
       .subscribe((res: DefboardComponent) => {
         this.defboard = res;
       });
-    this.inputBoard.id = this.id;
+    //this.inputBoard.id = this.id;
   }
 
   ngOnDestroy() {

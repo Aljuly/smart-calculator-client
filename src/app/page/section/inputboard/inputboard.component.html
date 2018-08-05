@@ -3,7 +3,8 @@
 	<div class="form-group">
 		<div class="row">
 			<div class="col-2">
-				<input #box (keyup) = "firstInputOnKey(box.value)" class="form-control" type="text" value="" id="firstnumber">
+				<!-- <input #box (keyup) = "firstInputOnKey(box.value)" class="form-control" type="text" value="" id="firstnumber"> -->
+				<input [(ngModel)] = "firstnumber" placeholder="firstnumber">
 			</div>
 			<div class="col-md-0.5">
 				<div class="col-0.5" [ngSwitch]="id">
@@ -15,7 +16,8 @@
 				</div>
 			</div>
 			<div class="col-2">
-				<input #box (keyup) = "secondInputOnKey(box.value)" class="form-control" type="text" value="" id="secondnumber">
+				<!--<input #box (keyup) = "secondInputOnKey(box.value)" class="form-control" type="text" value="" id="secondnumber"> -->
+				<input [(ngModel)] = "secondnumber" placeholder="secondnumber">
 			</div>
 			<div class="col-3">
 				<a (click)="calculate()" id="toggle-btn" href="#" class="btn btn-primary">

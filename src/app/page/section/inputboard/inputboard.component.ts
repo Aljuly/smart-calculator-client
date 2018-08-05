@@ -1,20 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-inputboard',
   templateUrl: './inputboard.component.html'
 })
-export class InputBoardComponent {
+export class InputBoardComponent implements OnInit, OnDestroy  {
   @Input() id: number;
   firstnumber: string;
   secondnumber: string;
-  firstInputOnKey(value: string) {
-    this.firstnumber = value;
-  }
-
-  secondInputOnKey(value: string) {
-    this.secondnumber = value;
-  }
-
+  constructor(
+    private activatedRoute: ActivatedRoute
+  ) {}
+  ngOnInit() {}
+  ngOnDestroy() {}
   calculate() {}
 }
