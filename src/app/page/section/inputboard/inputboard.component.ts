@@ -1,9 +1,8 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: "app-inputboard",
-  templateUrl: "./inputboard.component.html",
-  styleUrls: ["./inputboard.component.css"]
+  selector: 'app-inputboard',
+  templateUrl: './inputboard.component.html'
 })
 export class InputBoardComponent {
   @Input() id: number;
