@@ -1,29 +1,39 @@
 <article class="input-data">
 	<h1>Input data</h1>
-	<div class="form-group">
-		<div class="row">
-			<div class="col-2">
-				<!-- <input #box (keyup) = "firstInputOnKey(box.value)" class="form-control" type="text" value="" id="firstnumber"> -->
-				<input [(ngModel)] = "firstnumber" placeholder="firstnumber">
-			</div>
-			<div class="col-md-0.5">
-				<div class="col-0.5" [ngSwitch]="id">
-					<div *ngSwitchCase="1"><i class="fas fa-plus"></i></div>
-					<div *ngSwitchCase="2"><i class="fas fa-minus"></i></div>
-					<div *ngSwitchCase="3"><i class="fas fa-times"></i></div>
-					<div *ngSwitchCase="4"><i class="fas fa-divide"></i></div>
-					<div *ngSwitchCase="5"><i class="fas fa-percent"></i></div>
-				</div>
-			</div>
-			<div class="col-2">
-				<!--<input #box (keyup) = "secondInputOnKey(box.value)" class="form-control" type="text" value="" id="secondnumber"> -->
-				<input [(ngModel)] = "secondnumber" placeholder="secondnumber">
-			</div>
-			<div class="col-3">
-				<a (click)="calculate()" id="toggle-btn" href="#" class="btn btn-primary">
-					<i class="fas fa-equals"></i>
-				</a>
-			</div>
-		</div>
-	</div>
+  <form [formGroup] = "inputForm" (ngSubmit) = "calculate()">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <input type="text" formControlName="firstNumber" [pattern]="[1-9][0-9]" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.firstnumber?.pattern }"/>
+          <div *ngIf="f.firstnumber?.pattern">Entered value not valid!</div>
+        </div>
+        <div class="col-md-0.5">
+          <div class="col-0.5" [ngSwitch]="id">
+            <div *ngSwitchCase="1"><i class="fas fa-plus"></i></div>
+            <div *ngSwitchCase="2"><i class="fas fa-minus"></i></div>
+            <div *ngSwitchCase="3"><i class="fas fa-times"></i></div>
+            <div *ngSwitchCase="4"><i class="fas fa-divide"></i></div>
+            <div *ngSwitchCase="5"><i class="fas fa-percent"></i></div>
+          </div>
+        </div>
+        <div class="col-2">
+          <input type="text" formControlName="secondNumber" [pattern]="[1-9][0-9]" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.secondnumber?.pattern }"/>
+          <div *ngIf="f.secondnumber?.pattern">Entered value not valid!</div>
+        </div>
+        <div class="col-3">
+          <a class="btn btn-primary">
+            <i class="fas fa-equals"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div>
+    <h1>Calculation plot</h1>
+  </div>
+  <div>
+    {{resultPlot}}
+  </div>
 </article>
