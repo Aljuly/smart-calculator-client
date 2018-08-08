@@ -16,6 +16,7 @@ import { SectionComponent } from './page/section/section.component';
 import { DefboardComponent } from './page/section/defboard/defboard.component';
 import { InputBoardComponent } from './page/section/inputboard/inputboard.component';
 import { ResultComponent } from './page/section/result/result.component';
+import { DivisionFormatterComponent } from './page/section/inputboard/division-formatter';
 import { DataService} from './_services/data.service';
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
@@ -45,7 +46,7 @@ import { RegisterComponent } from './register';
     LoginComponent,
     RegisterComponent,
     AlertComponent,
-    LoginComponent
+    DivisionFormatterComponent
   ],
   providers: [
     AuthGuard,

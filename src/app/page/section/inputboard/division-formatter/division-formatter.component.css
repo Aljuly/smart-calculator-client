@@ -1,0 +1,16 @@
+.minus {
+  rowspan: 2;
+}
+
+.t-cell {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.left-border {
+  BORDER-left: 1px solid #000000;
+}
+
+.bottom-border {
+  BORDER-BOTTOM: 1px solid #000000;
+}
