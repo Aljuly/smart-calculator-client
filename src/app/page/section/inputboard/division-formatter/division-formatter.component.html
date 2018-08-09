@@ -12,7 +12,7 @@
           <td *ngFor="let c of second | slice:0" class="t-cell" [ngClass]="{'bottom-border': c!=' '}">{{c}}</td>
           <td *ngFor="let c of result | slice:0; let first = first" class="t-cell top-border" [ngClass]="{'left-border': c!=' '}">{{c}}</td>
         </tr>
-        <tr *ngFor="let step of steps; let i = index">
+        <tr *ngFor="let step of stepsOut">
           <td rowspan="2" class="t-cell">-</td>
           <td *ngFor="let c of step.firstnumber | slice: 0" class="t-cell">{{c}}</td>
           <td *ngFor="let c of step.secondnumber | slice: 0" class="t-cell" [ngClass]="{'bottom-border': c!=' '}">{{c}}</td>
