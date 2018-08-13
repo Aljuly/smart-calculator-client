@@ -29,7 +29,7 @@ export class SectionComponent implements OnInit, OnDestroy {
       .subscribe((res: DefboardComponent) => {
         this.defboard = res;
       });
-    //this.inputBoard.id = this.id;
+    // this.inputBoard.id = this.id;
   }
 
   ngOnDestroy() {

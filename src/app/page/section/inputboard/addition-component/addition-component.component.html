@@ -1,3 +1,24 @@
-<p>
-  addition-component works!
-</p>
+<!-- Addition and subtraction -->
+<article class="operation-def">
+  <h1> Calculation plot </h1>
+  <div>
+    <table cellspacing="" style="margin: auto">
+      <tbody>
+        <tr *ngIf="addition">
+          <td rowspan="2" class="t-cell">+</td>
+          <td *ngFor="let c of firstTerm | slice: 0" class="t-cell">{{c}}</td>
+        </tr>
+        <tr *ngIf="subtraction">
+          <td rowspan="2" class="t-cell">-</td>
+          <td *ngFor="let c of secondTerm">{{c}}</td>
+        </tr>
+        <tr>
+          <td *ngFor="let c of secondTerm | slice: 0" class="t-cell">{{c}}</td>
+        </tr>
+        <tr>
+          <td *ngFor="let c of sum | slice: 0" class="t-cell top-border">{{c}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>

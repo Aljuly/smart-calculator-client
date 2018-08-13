@@ -11,13 +11,13 @@ export class AdditionComponentComponent implements OnInit {
   @Input() sum: string;
   @Input() operationType: number;
   addition: boolean;
-  substraction: boolean;
+  subtraction: boolean;
   stub: string;
   constructor() { }
 
   ngOnInit() {
     if (this.operationType === 1) { this.addition = true; }
-    if (this.operationType === 2) { this.substraction = true; }
+    if (this.operationType === 2) { this.subtraction = true; }
     const m = (this.sum.length + 1) - Math.max(this.firstTerm.length, this.secondTerm.length);
     const f = (this.sum.length - this.firstTerm.length) - 1 - m;
     const s = (this.sum.length - this.secondTerm.length) - 1 - m;
