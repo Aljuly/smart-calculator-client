@@ -24,6 +24,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { MultiplycationFormatterComponent } from './page/section/inputboard/multiplycation-formatter/multiplycation-formatter.component';
+import { AdditionComponent } from './page/section/inputboard/addition/addition.component';
+import { AdditionComponentComponent } from './page/section/inputboard/addition-component/addition-component.component';
 
 @NgModule({
   imports: [
@@ -46,7 +49,10 @@ import { RegisterComponent } from './register';
     LoginComponent,
     RegisterComponent,
     AlertComponent,
-    DivisionFormatterComponent
+    DivisionFormatterComponent,
+    MultiplycationFormatterComponent,
+    AdditionComponent,
+    AdditionComponentComponent
   ],
   providers: [
     AuthGuard,
