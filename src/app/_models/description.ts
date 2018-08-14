@@ -5,11 +5,12 @@ export class Description {
     private _id: number;
     private _title: string;
     private _description: string;
-    constructor(id: number, title: string, description: string) {
-        this._id = id;
-        this._title = title;
-        this._description = description;
+    constructor() {
+        this._id = void 0;
+        this.title = void 0;
+        this._description = void 0;
     }
+
     public get description(): string {
         return this._description;
     }

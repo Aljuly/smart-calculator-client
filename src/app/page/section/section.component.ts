@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../_services/data.service';
-import { DefboardComponent } from './defboard/defboard.component';
-import { InputBoardComponent } from './inputboard/inputboard.component';
+import { Description } from '../../_models';
+import { deserialize } from 'json-typescript-mapper';
+import { ComunicationService } from '../../_services';
 
 @Component({
   selector: 'app-section',
@@ -12,24 +13,25 @@ import { InputBoardComponent } from './inputboard/inputboard.component';
 export class SectionComponent implements OnInit, OnDestroy {
   id: number;
   paramsSub: any;
-  @ViewChild(DefboardComponent)
-  private defboard: DefboardComponent;
-  @ViewChild(InputBoardComponent)
-  private inputBoard: InputBoardComponent;
+  description: Description;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private dataService: DataService
+    private dataService: DataService,
+    private comunicationService: ComunicationService
   ) {}
   ngOnInit() {
+    // Get the selected operation
     this.paramsSub = this.activatedRoute.params.subscribe(
       params => (this.id = params['id'])
     );
+    // Look up on the server for it's description
     this.dataService
       .get_description(this.paramsSub)
-      .subscribe((res: DefboardComponent) => {
-        this.defboard = res;
+      .subscribe((res: any) => {
+        this.description = deserialize(Description, res);
       });
-    // this.inputBoard.id = this.id;
+    // Broadcast this description
+    this.comunicationService.changeDescription(this.description);
   }
 
   ngOnDestroy() {

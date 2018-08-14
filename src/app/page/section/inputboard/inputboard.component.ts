@@ -46,6 +46,6 @@ export class InputBoardComponent implements OnInit, OnDestroy {
     // Make Http request
     this.data
       .get_result(this.id, this.firstnumber, this.secondnumber)
-      .subscribe();
+      .subscribe(res: any);
   }
 }
