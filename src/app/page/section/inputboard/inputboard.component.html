@@ -9,7 +9,7 @@
           <div *ngIf="f.firstnumber?.pattern">Entered value not valid!</div>
         </div>
         <div class="col-md-0.5">
-          <div class="col-0.5" [ngSwitch]="id">
+          <div class="col-0.5" [ngSwitch]="description.id">
             <div *ngSwitchCase="1"><i class="fas fa-plus"></i></div>
             <div *ngSwitchCase="2"><i class="fas fa-minus"></i></div>
             <div *ngSwitchCase="3"><i class="fas fa-times"></i></div>
@@ -30,10 +30,4 @@
       </div>
     </div>
   </form>
-  <div>
-    <h1>Calculation plot</h1>
-  </div>
-  <div>
-    {{resultPlot}}
-  </div>
 </article>

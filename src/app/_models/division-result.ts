@@ -2,7 +2,9 @@ import { Step } from './step';
 import { JsonProperty } from 'json-typescript-mapper';
 
 /**
- * New typescript file
+ * Class that strores info about division result
+ * @author Alexander Zhulinsky
+ * @version 1.0 13 Aug 2018
  */
 export class DivisionResult {
     private _dividend: string;
@@ -68,7 +70,7 @@ export class DivisionResult {
     public get steps(): Step[] {
         return this._steps;
     }
-    @JsonProperty('steps')
+    @JsonProperty({clazz: Step, name: 'steps'})
     public set steps(value: Step[]) {
         this._steps = value;
     }

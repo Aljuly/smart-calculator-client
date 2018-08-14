@@ -24,7 +24,7 @@ export class SectionComponent implements OnInit, OnDestroy {
     this.paramsSub = this.activatedRoute.params.subscribe(
       params => (this.id = params['id'])
     );
-    // Look up on the server for it's description
+    // Look up on the server for selected operation description
     this.dataService
       .get_description(this.paramsSub)
       .subscribe((res: any) => {
