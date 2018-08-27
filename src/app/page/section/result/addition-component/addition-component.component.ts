@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './addition-component.component.html',
   styleUrls: ['./addition-component.component.css']
 })
-export class AdditionComponentComponent implements OnInit {
+export class AdditionComponent implements OnInit {
   @Input() firstTerm: string;
   @Input() secondTerm: string;
   @Input() sum: string;

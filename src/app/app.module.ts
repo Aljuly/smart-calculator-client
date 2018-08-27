@@ -16,17 +16,17 @@ import { SectionComponent } from './page/section/section.component';
 import { DefboardComponent } from './page/section/defboard/defboard.component';
 import { InputBoardComponent } from './page/section/inputboard/inputboard.component';
 import { ResultComponent } from './page/section/result/result.component';
-import { DivisionFormatterComponent } from './page/section/inputboard/division-formatter';
-import { DataService} from './_services/data.service';
+import { DataService } from './_services/data.service';
+import { ComunicationService } from './_services';
+import { AlertService, AuthenticationService, UserService } from './_services';
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { AlertService, AuthenticationService, UserService } from './_services';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
-import { MultiplycationFormatterComponent } from './page/section/inputboard/multiplycation-formatter/multiplycation-formatter.component';
-import { AdditionComponent } from './page/section/inputboard/addition/addition.component';
-import { AdditionComponentComponent } from './page/section/inputboard/addition-component/addition-component.component';
+import { DivisionFormatterComponent } from './page/section/result/division-formatter';
+import { MultiplycationFormatterComponent } from './page/section/result/multiplycation-formatter';
+import { AdditionComponent } from './page/section/result/addition-component';
 
 @NgModule({
   imports: [
@@ -51,8 +51,7 @@ import { AdditionComponentComponent } from './page/section/inputboard/addition-c
     AlertComponent,
     DivisionFormatterComponent,
     MultiplycationFormatterComponent,
-    AdditionComponent,
-    AdditionComponentComponent
+    AdditionComponent
   ],
   providers: [
     AuthGuard,
@@ -62,7 +61,8 @@ import { AdditionComponentComponent } from './page/section/inputboard/addition-c
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: APP_BASE_HREF, useValue: '/' },
-    DataService
+    DataService,
+    ComunicationService
   ],
 
   bootstrap: [AppComponent]

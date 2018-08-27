@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DataService } from '../../../_services/data.service';
 import { ComunicationService } from '../../../_services';
 import { Description, DivisionResult, MultiplicationResult, AdditionResult } from '../../../_models';
-import { deserialize } from 'json-typescript-mapper';
+import { JsonConvert, OperationMode } from 'json2typescript';
 
 @Component({
   selector: 'app-inputboard',
@@ -17,24 +17,24 @@ export class InputBoardComponent implements OnInit, OnDestroy {
   submitted = false;
   firstnumber: string;
   secondnumber: string;
-  private paramsSub: Subscription;
   description: Description;
   additionResult: AdditionResult;
   multiplicationResult: MultiplicationResult;
   divisionResult: DivisionResult;
+  jsonConvert: JsonConvert;
   constructor(
-    private formBuilder,
-    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    // private activatedRoute: ActivatedRoute,
     private data: DataService,
     private comunicationService: ComunicationService
   ) {}
   ngOnInit() {
     this.comunicationService.DescriptionMessage.subscribe(description => this.description = description);
-    /*
-    this.paramsSub = this.activatedRoute.params.subscribe(
-      params => (this.id = params['id'])
-    );
-    */
+    // Check the detailed reference in the chapter "JsonConvert class properties and methods"
+    this.jsonConvert = new JsonConvert();
+    this.jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
+    this.jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
+    // Input data
     this.inputForm = this.formBuilder.group({
       firstnumber: ['', Validators.required],
       secondnumber: ['', Validators.required]
@@ -45,7 +45,7 @@ export class InputBoardComponent implements OnInit, OnDestroy {
     return this.inputForm.controls;
   }
   ngOnDestroy() {
-    this.paramsSub.unsubscribe();
+    // this.paramsSub.unsubscribe();
   }
   // Send request to the calculation service
   calculate() {
@@ -80,14 +80,14 @@ export class InputBoardComponent implements OnInit, OnDestroy {
             break;
           }
           case 3: {
-            this.multiplicationResult = deserialize(MultiplicationResult, res);
+            this.multiplicationResult = this.jsonConvert.deserialize(MultiplicationResult, res);
             // broadcast result
             this.comunicationService.changeMultiplycationResult(this.multiplicationResult);
             break;
           }
           case 4:
           case 5: {
-            this.divisionResult = deserialize(DivisionResult, res);
+            this.divisionResult = this.jsonConvert.deserialize(DivisionResult, res);
             // broadcast result
             this.comunicationService.changeDivisionResult(this.divisionResult);
             break;

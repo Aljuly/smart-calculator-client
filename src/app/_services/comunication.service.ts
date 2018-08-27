@@ -29,6 +29,5 @@ export class ComunicationService {
         this.divisionResultMassageSource.next(divisionResult);
     }
 
-
 }
 

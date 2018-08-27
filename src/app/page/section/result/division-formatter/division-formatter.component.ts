@@ -2,7 +2,7 @@ import { Step } from '../../../../_models';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-result',
+  selector: 'app-division-formatter',
   templateUrl: './division-formatter.component.html',
   styleUrls: ['./division-formatter.component.css']
 })

@@ -1,11 +1,12 @@
 import { Step } from './step';
-import { JsonProperty } from 'json-typescript-mapper';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
 /**
  * Class that strores info about division result
  * @author Alexander Zhulinsky
  * @version 1.0 13 Aug 2018
  */
+@JsonObject('DivisionResult')
 export class DivisionResult {
     private _dividend: string;
     private _divisor: string;
@@ -25,7 +26,7 @@ export class DivisionResult {
         this._fraction = void 0;
         this._steps = void 0;
     }
-    @JsonProperty('dividend')
+    @JsonProperty('dividend', String)
     public set dividend(value: string) {
         this._dividend = value;
     }
@@ -35,42 +36,42 @@ export class DivisionResult {
     public get divisor(): string {
         return this._divisor;
     }
-    @JsonProperty('divisor')
+    @JsonProperty('divisor', String)
     public set divisor(value: string) {
         this._divisor = value;
     }
     public get quotient(): string {
         return this._quotient;
     }
-    @JsonProperty('quotient')
+    @JsonProperty('quotient', String)
     public set quotient(value: string) {
         this._quotient = value;
     }
     public get reminder(): string {
         return this._reminder;
     }
-    @JsonProperty('reminder')
+    @JsonProperty('reminder', String)
     public set reminder(value: string) {
         this._reminder = value;
     }
     public get alert(): string {
         return this._alert;
     }
-    @JsonProperty('alert')
+    @JsonProperty('alert', String)
     public set alert(value: string) {
         this._alert = value;
     }
     public get fraction(): string {
         return this._fraction;
     }
-    @JsonProperty('fraction')
+    @JsonProperty('fraction', String)
     public set fraction(value: string) {
         this._fraction = value;
     }
     public get steps(): Step[] {
         return this._steps;
     }
-    @JsonProperty({clazz: Step, name: 'steps'})
+    @JsonProperty('steps', [Step])
     public set steps(value: Step[]) {
         this._steps = value;
     }

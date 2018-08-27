@@ -1,26 +1,31 @@
-import { JsonProperty } from 'json-typescript-mapper';
-
+import { JsonObject, JsonProperty } from 'json2typescript';
 /**
  * Class for storing data of the one step of the calculations
  *
  * @author Alexander Zhulinsky
  * @version 1.0 07 Aug 2018
  */
+@JsonObject('Step')
 export class Step {
+  @JsonProperty('firstNumber', String)
   private _firstnumber: string;
+  @JsonProperty('secondNumber', String)
   private _secondnumber: string;
+  @JsonProperty('difference', String)
   private _difference: string;
 
-  constructor() {
-    this._firstnumber = void 0;
-    this._secondnumber = void 0;
-    this._difference = void 0;
+  constructor(
+    firstnumber?: string,
+    secondnumber?: string,
+    difference?: string) {
+    this._firstnumber = firstnumber || void 0;
+    this._secondnumber = secondnumber || void 0;
+    this._difference = difference || void 0;
   }
 
   get firstnumber(): string {
     return this._firstnumber;
   }
-  @JsonProperty('firstNumber')
   set firstnumber(value: string) {
     this._firstnumber = value;
   }
@@ -28,7 +33,6 @@ export class Step {
   get secondnumber(): string {
     return this._secondnumber;
   }
-  @JsonProperty('secondNumber')
   set secondnumber(value: string) {
     this._secondnumber = value;
   }
@@ -36,7 +40,6 @@ export class Step {
   get difference(): string {
     return this._difference;
   }
-  @JsonProperty('difference')
   set difference(value: string) {
     this._difference = value;
   }
