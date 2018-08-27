@@ -11,6 +11,8 @@ export class ComunicationService {
     private divisionResultMassageSource = new BehaviorSubject(new DivisionResult());
     DescriptionMessage = this.descriptionMessageSource.asObservable();
     divisionResultMessage = this.divisionResultMassageSource.asObservable();
+    multiplicationResultMessage = this.multiplicationResultMessageSource.asObservable();
+    additionResultMessage = this.additionResultMessageSource.asObservable();
     constructor() { }
 
     changeDescription(description: Description) {
