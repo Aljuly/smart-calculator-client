@@ -1,47 +1,44 @@
-import { Step } from '../../../../_models';
-import { Component, Input, OnInit } from '@angular/core';
+import { Step, DivisionResult } from '../../../../_models';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-division-formatter',
   templateUrl: './division-formatter.component.html',
   styleUrls: ['./division-formatter.component.css']
 })
-export class DivisionFormatterComponent implements OnInit {
-  @Input() dividend: string;
-  @Input() divisor: string;
-  @Input() quotient: string;
-  @Input() fraction: string;
-  @Input() steps: Step[];
+export class DivisionFormatterComponent implements OnChanges {
+  @Input() divisionResult: DivisionResult;
   second: string;
   stepsOut: Step[];
   result: string;
   constructor() {}
 
-  ngOnInit() {
+  ngOnChanges() {
     let j: number;
     let diff: number;
     let i = 0;
     // lets make a first step
-    let firstNumber: string = this.steps[0].firstnumber;
-    let secondNumber: string = this.steps[0].secondnumber;
-    this.result = this.quotient.concat(this.formatFraction(this.fraction, Number(this.divisor)));
-    let difference: string = this.steps[0].difference;
+    let firstNumber: string = this.divisionResult.steps[0].firstnumber;
+    let secondNumber: string = this.divisionResult.steps[0].secondnumber;
+    this.result = this.divisionResult.quotient.concat(this.formatFraction(this.divisionResult.fraction,
+      Number(this.divisionResult.divisor)));
+    let difference: string = this.divisionResult.steps[0].difference;
     this.second = this.assemblyString(firstNumber.length - secondNumber.length + 1, ' ')
       .concat(secondNumber);
     j = firstNumber.length + 1;
     // define difference for the next step
     diff = Number(difference);
-    for (let k = 1; k < this.steps.length; k++) {
+    for (let k = 1; k < this.divisionResult.steps.length; k++) {
       i++;
-      if (i === this.steps.length) {
-        firstNumber = this.removeLeadingZero(this.steps[k].firstnumber);
+      if (i === this.divisionResult.steps.length) {
+        firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
         j += firstNumber.length - String(diff).length;
         if (difference.length === 0) { j++; }
         this.stepsOut.push(new Step(firstNumber, '', ''));
       } else {
-        firstNumber = this.removeLeadingZero(this.steps[k].firstnumber);
-        secondNumber = this.steps[k].secondnumber;
-        difference = this.steps[k].difference;
+        firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
+        secondNumber = this.divisionResult.steps[k].secondnumber;
+        difference = this.divisionResult.steps[k].difference;
         // increase indent on count of added digits
         j += firstNumber.length - String(diff).length;
         // if the difference is 0 than omit it

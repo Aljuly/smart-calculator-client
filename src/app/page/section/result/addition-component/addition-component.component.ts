@@ -1,28 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { AdditionResult } from '../../../../_models';
 
 @Component({
   selector: 'app-addition-component',
   templateUrl: './addition-component.component.html',
   styleUrls: ['./addition-component.component.css']
 })
-export class AdditionComponent implements OnInit {
-  @Input() firstTerm: string;
-  @Input() secondTerm: string;
-  @Input() sum: string;
-  @Input() operationType: number;
+export class AdditionComponent implements OnChanges {
+  @Input() additionResult: AdditionResult;
+  firstTerm: string;
+  secondTerm: string;
   addition: boolean;
   subtraction: boolean;
   stub: string;
   constructor() { }
 
-  ngOnInit() {
-    if (this.operationType === 1) { this.addition = true; }
-    if (this.operationType === 2) { this.subtraction = true; }
-    const m = (this.sum.length + 1) - Math.max(this.firstTerm.length, this.secondTerm.length);
-    const f = (this.sum.length - this.firstTerm.length) - 1 - m;
-    const s = (this.sum.length - this.secondTerm.length) - 1 - m;
-    this.firstTerm = this.assemblyString(f, ' ').concat(this.firstTerm);
-    this.secondTerm = this.assemblyString(s, ' ').concat(this.secondTerm);
+  ngOnChanges() {
+    if (this.additionResult.isAddition) { this.addition = true; }
+    if (this.additionResult.isSubtraction) { this.subtraction = true; }
+    const m = (this.additionResult.sum.length + 1) - Math.max(this.additionResult.firstTerm.length,
+      this.additionResult.secondTerm.length);
+    const f = (this.additionResult.sum.length - this.additionResult.firstTerm.length) - 1 - m;
+    const s = (this.additionResult.sum.length - this.additionResult.secondTerm.length) - 1 - m;
+    this.firstTerm = this.assemblyString(f, ' ').concat(this.additionResult.firstTerm);
+    this.secondTerm = this.assemblyString(s, ' ').concat(this.additionResult.secondTerm);
     this.stub = this.assemblyString(m, ' ');
   }
   // Utility function that forms string from given char of given length

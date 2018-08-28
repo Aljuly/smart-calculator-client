@@ -3,22 +3,19 @@
     <div style="text-align: center">
         <span [ngSwitch]="description.id">
             <p *ngSwitchCase="1">
-                <app-addition-component></app-addition-component>
+                <app-addition-component [additionResult] = "additionResult"></app-addition-component>
             </p>
             <p *ngSwitchCase="2">
-                <app-addition-component></app-addition-component>
+                <app-addition-component [additionResult] = "additionResult"></app-addition-component>
             </p>
             <p *ngSwitchCase="3">
-                <app-multiplycation-formatter></app-multiplycation-formatter>   
+                <app-multiplycation-formatter [multiplycationResult] = "multiplycationResult"></app-multiplycation-formatter>   
             </p>
             <p *ngSwitchCase="4">
-                <app-division-formatter></app-division-formatter>
+                <app-division-formatter [divisionResult] = "divisionResult"></app-division-formatter>
             </p>
             <p *ngSwitchCase="5">
-                <app-division-formatter></app-division-formatter>
-            </p>
-            <p *ngSwitchDefault>
-                <div></div>
+                <app-division-formatter [divisionResult] = "divisionResult"></app-division-formatter>
             </p>
         </span>
     </div>
