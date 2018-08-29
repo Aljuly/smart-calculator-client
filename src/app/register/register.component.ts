@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertService, UserService } from '../_services';
 
@@ -12,6 +13,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
   constructor(
+    public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
@@ -19,9 +21,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      userName: ['', Validators.required],
+      login: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
