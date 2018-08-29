@@ -22,8 +22,8 @@ import { AlertService, AuthenticationService, UserService } from './_services';
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { LoginComponent } from './login';
-import { RegisterComponent } from './register';
+import { LoginComponent, LoginModalComponent } from './login';
+import { RegisterComponent, RegisterModalComponent } from './register';
 import { DivisionFormatterComponent } from './page/section/result/division-formatter';
 import { MultiplycationFormatterComponent } from './page/section/result/multiplycation-formatter';
 import { AdditionComponent } from './page/section/result/addition-component';
@@ -47,7 +47,9 @@ import { AdditionComponent } from './page/section/result/addition-component';
     InputBoardComponent,
     ResultComponent,
     LoginComponent,
+    LoginModalComponent,
     RegisterComponent,
+    RegisterModalComponent,
     AlertComponent,
     DivisionFormatterComponent,
     MultiplycationFormatterComponent,

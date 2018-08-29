@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertService, UserService } from '../_services';
 
@@ -51,5 +51,17 @@ export class RegisterComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+}
+
+@Component({
+  selector: 'app-register-modal-componet',
+  templateUrl: '<div></div>'
+})
+export class RegisterModalComponent implements OnInit {
+  constructor(private modalService: NgbModal) {}
+
+  ngOnInit() {
+    const modalRef = this.modalService.open(RegisterComponent);
   }
 }

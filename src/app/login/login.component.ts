@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService, AuthenticationService } from '../_services';
 
 @Component({templateUrl: 'login.component.html'})
@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
 
   constructor(
+    public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -54,5 +55,17 @@ export class LoginComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+}
+
+@Component({
+  selector: 'app-login-modal-componet',
+  templateUrl: '<div></div>'
+})
+export class LoginModalComponent implements OnInit {
+  constructor(private modalService: NgbModal) {}
+
+  ngOnInit() {
+    const modalRef = this.modalService.open(LoginComponent);
   }
 }
