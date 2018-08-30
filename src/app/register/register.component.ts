@@ -6,7 +6,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertService, UserService } from '../_services';
 
-@Component({templateUrl: 'register.component.html'})
+@Component({templateUrl: './register.component_.html'})
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
@@ -56,12 +56,12 @@ export class RegisterComponent implements OnInit {
 
 @Component({
   selector: 'app-register-modal-componet',
-  templateUrl: '<div></div>'
+  template: `<div></div>`
 })
 export class RegisterModalComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
-    const modalRef = this.modalService.open(RegisterComponent);
+    setTimeout(() => this.modalService.open(RegisterComponent));
   }
 }

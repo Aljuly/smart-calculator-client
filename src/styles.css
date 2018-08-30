@@ -677,7 +677,7 @@ footer.main-footer p {
 
 .login-page .form-outer,
 .register-page .form-outer {
-  min-height: 100vh;
+  min-height: auto;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px 0;

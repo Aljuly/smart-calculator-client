@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Description, DivisionResult, AdditionResult, MultiplicationResult } from '../_models';
+import { Description, DivisionResult, AdditionResult, MultiplicationResult, User } from '../_models';
 
 @Injectable()
 export class ComunicationService {
@@ -9,10 +9,13 @@ export class ComunicationService {
     private additionResultMessageSource = new BehaviorSubject(new AdditionResult());
     private multiplicationResultMessageSource = new BehaviorSubject(new MultiplicationResult());
     private divisionResultMassageSource = new BehaviorSubject(new DivisionResult());
+    private userMessageSource = new BehaviorSubject(new User());
+    userMessage = this.userMessageSource.asObservable();
     DescriptionMessage = this.descriptionMessageSource.asObservable();
     divisionResultMessage = this.divisionResultMassageSource.asObservable();
     multiplicationResultMessage = this.multiplicationResultMessageSource.asObservable();
     additionResultMessage = this.additionResultMessageSource.asObservable();
+
     constructor() { }
 
     changeDescription(description: Description) {
@@ -29,6 +32,10 @@ export class ComunicationService {
 
     changeDivisionResult(divisionResult: DivisionResult) {
         this.divisionResultMassageSource.next(divisionResult);
+    }
+
+    changeLoggedInUser(user: User) {
+        this.userMessageSource.next(user);
     }
 
 }

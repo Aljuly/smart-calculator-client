@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -27,6 +29,7 @@ import { RegisterComponent, RegisterModalComponent } from './register';
 import { DivisionFormatterComponent } from './page/section/result/division-formatter';
 import { MultiplycationFormatterComponent } from './page/section/result/multiplycation-formatter';
 import { AdditionComponent } from './page/section/result/addition-component';
+import { SignComponent } from './page/header/sign';
 
 @NgModule({
   imports: [
@@ -34,6 +37,7 @@ import { AdditionComponent } from './page/section/result/addition-component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
+    NgbModule.forRoot(),
     HttpClientModule
   ],
   declarations: [
@@ -53,7 +57,8 @@ import { AdditionComponent } from './page/section/result/addition-component';
     AlertComponent,
     DivisionFormatterComponent,
     MultiplycationFormatterComponent,
-    AdditionComponent
+    AdditionComponent,
+    SignComponent
   ],
   providers: [
     AuthGuard,
@@ -66,7 +71,7 @@ import { AdditionComponent } from './page/section/result/addition-component';
     DataService,
     ComunicationService
   ],
-
+  entryComponents: [LoginComponent, RegisterComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

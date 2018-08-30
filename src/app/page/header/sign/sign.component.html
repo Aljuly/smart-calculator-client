@@ -1,0 +1,18 @@
+<li class="nav-item">
+    <div *ngIf="signedIn">
+        <span class="d-none d-sm-inline-block">
+            Hello, {{user.login}}!
+        </span>
+        <a (click)="logout()" class="nav-link logout">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>   
+    </div>
+    <div>
+        <a [routerLink]="['/login']" class="nav-link logout">
+            <span class="d-none d-sm-inline-block">
+                Log In
+            </span>
+            <i class="fas fa-sign-in-alt"></i>
+        </a>   
+    </div>
+</li>

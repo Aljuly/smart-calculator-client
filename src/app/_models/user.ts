@@ -5,18 +5,27 @@
  */
 export class User {
 
-  private _id: number;
   private _username: string;
+  private _login: string;
+  private _email: string;
   private _password: string;
-  private _firstName: string;
 
-  private _lastName: string;
+  constructor(
+    username?: string,
+    login?: string,
+    email?: string,
+    password?: string ) {
+      this._username = username || void 0;
+      this._login = login || void 0;
+      this._email = email || void 0;
+      this._password = password ||  void 0;
+    }
 
-  public get id(): number {
-    return this._id;
+  public get email(): string {
+    return this._email;
   }
-  public set id(value: number) {
-    this._id = value;
+  public set email(value: string) {
+    this._email = value;
   }
   public get username(): string {
     return this._username;
@@ -31,15 +40,13 @@ export class User {
     this._password = value;
   }
   public get firstName(): string {
-    return this._firstName;
+    return this._login;
   }
   public set firstName(value: string) {
-    this._firstName = value;
+    this._login = value;
   }
-  public get lastName(): string {
-    return this._lastName;
-  }
-  public set lastName(value: string) {
-    this._lastName = value;
+
+  public isEmpty(): boolean {
+    return (this._username == null && this._email == null);
   }
 }
