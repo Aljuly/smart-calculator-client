@@ -9,10 +9,12 @@ import { Description } from '../../../_models';
 })
 export class DefboardComponent implements OnInit {
   description: Description;
-  constructor(private comunicationService: ComunicationService) {  }
+  constructor(private comunicationService: ComunicationService) { }
   ngOnInit(): void {
     // Be ready to optain actual data
-    this.comunicationService.DescriptionMessage.subscribe(description => this.description = description);
+    this.comunicationService.DescriptionMessage.subscribe((description) => {
+      this.description = description;
+    });
   }
 }
 

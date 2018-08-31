@@ -1,10 +1,10 @@
 <article class="input-data">
 	<h1>Input data</h1>
-  <form [formGroup] = "inputForm" (ngSubmit) = "calculate()">
+  <form [formGroup] = "inputForm">
     <div class="form-group">
       <div class="row">
         <div class="col-2">
-          <input type="text" formControlName="firstNumber" [pattern]="[1-9][0-9]" class="form-control"
+          <input type="text" formControlName="firstnumber" [pattern]="[1-9][0-9]" class="form-control"
                  [ngClass]="{ 'is-invalid': submitted && f.firstnumber?.pattern }"/>
           <div *ngIf="f.firstnumber?.pattern">Entered value not valid!</div>
         </div>
@@ -18,12 +18,12 @@
           </div>
         </div>
         <div class="col-2">
-          <input type="text" formControlName="secondNumber" [pattern]="[1-9][0-9]" class="form-control"
+          <input type="text" formControlName="secondnumber" [pattern]="[1-9][0-9]" class="form-control"
                  [ngClass]="{ 'is-invalid': submitted && f.secondnumber?.pattern }"/>
           <div *ngIf="f.secondnumber?.pattern">Entered value not valid!</div>
         </div>
         <div class="col-3">
-          <a class="btn btn-primary">
+          <a class="btn btn-primary" (click) = "calculate()">
             <i class="fas fa-equals"></i>
           </a>
         </div>

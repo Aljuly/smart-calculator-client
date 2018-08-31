@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DataService } from '../../../_services/data.service';
 import { ComunicationService } from '../../../_services';
 import { Description, DivisionResult, MultiplicationResult, AdditionResult } from '../../../_models';
-import { JsonConvert, OperationMode } from 'json2typescript';
+import { JsonConvert } from 'json2typescript';
 
 @Component({
   selector: 'app-inputboard',
@@ -32,7 +30,7 @@ export class InputBoardComponent implements OnInit, OnDestroy {
     this.comunicationService.DescriptionMessage.subscribe(description => this.description = description);
     // Check the detailed reference in the chapter "JsonConvert class properties and methods"
     this.jsonConvert = new JsonConvert();
-    this.jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
+    // this.jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
     this.jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
     // Input data
     this.inputForm = this.formBuilder.group({
@@ -80,14 +78,14 @@ export class InputBoardComponent implements OnInit, OnDestroy {
             break;
           }
           case 3: {
-            this.multiplicationResult = this.jsonConvert.deserialize(MultiplicationResult, res);
+            this.multiplicationResult = this.jsonConvert.deserialize(res, MultiplicationResult)[0];
             // broadcast result
             this.comunicationService.changeMultiplycationResult(this.multiplicationResult);
             break;
           }
           case 4:
           case 5: {
-            this.divisionResult = this.jsonConvert.deserialize(DivisionResult, res);
+            this.divisionResult = this.jsonConvert.deserialize(res, DivisionResult)[0];
             // broadcast result
             this.comunicationService.changeDivisionResult(this.divisionResult);
             break;

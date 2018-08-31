@@ -6,7 +6,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertService, UserService } from '../_services';
 
-@Component({templateUrl: './register.component_.html'})
+@Component({templateUrl: './register.component.html'})
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;

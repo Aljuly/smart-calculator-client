@@ -3,8 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
-  private baseUrl = 'http://localhost:8080';
-
+  private baseUrl = 'http://localhost:3000';
   constructor(private httpClient: HttpClient) {
   }
 
