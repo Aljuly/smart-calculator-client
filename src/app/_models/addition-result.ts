@@ -47,4 +47,8 @@ export class AdditionResult {
     public isSubtraction(): boolean {
         return this._operationType;
     }
+    // Define whereas object is empty
+    public isEmpty(): boolean {
+        return (this._firstTerm == null || this._secondTerm == null);
+    }
 }

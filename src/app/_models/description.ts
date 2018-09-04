@@ -5,16 +5,16 @@ export class Description {
     @JsonProperty('id', String, )
     private _id: number;
     @JsonProperty('title', String)
-    _title: string;
+    private _title: string;
     @JsonProperty('description', String)
-    _description: string;
+    private _description: string;
     constructor(
         id?: string,
         title?: string,
         description?: string
     ) {
         this._id = Number(id) || void 0;
-        this.title = title || void 0;
+        this._title = title || void 0;
         this._description = description || void 0;
     }
     public get description(): string {

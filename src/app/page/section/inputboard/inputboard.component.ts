@@ -9,17 +9,18 @@ import { JsonConvert } from 'json2typescript';
   selector: 'app-inputboard',
   templateUrl: './inputboard.component.html'
 })
-export class InputBoardComponent implements OnInit, OnDestroy {
+export class InputBoardComponent implements OnInit {
   inputForm: FormGroup;
   loading = false;
   submitted = false;
   firstnumber: string;
   secondnumber: string;
-  description: Description;
   additionResult: AdditionResult;
   multiplicationResult: MultiplicationResult;
   divisionResult: DivisionResult;
   jsonConvert: JsonConvert;
+  id: number;
+  private numberValidator = '/^[0-9]{1,6}$/';
   constructor(
     private formBuilder: FormBuilder,
     // private activatedRoute: ActivatedRoute,
@@ -27,36 +28,36 @@ export class InputBoardComponent implements OnInit, OnDestroy {
     private comunicationService: ComunicationService
   ) {}
   ngOnInit() {
-    this.comunicationService.DescriptionMessage.subscribe(description => this.description = description);
+    this.comunicationService.DescriptionMessage.subscribe((res) => {
+      this.id = res.id;
+    });
     // Check the detailed reference in the chapter "JsonConvert class properties and methods"
     this.jsonConvert = new JsonConvert();
     // this.jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
     this.jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
     // Input data
     this.inputForm = this.formBuilder.group({
-      firstnumber: ['', Validators.required],
-      secondnumber: ['', Validators.required]
+      firstnumber: ['', [Validators.required, Validators.pattern(this.numberValidator)]],
+      secondnumber: ['', [Validators.required, Validators.pattern(this.numberValidator)]]
     });
   }
   // getter for access to the forms fields
   get f() {
     return this.inputForm.controls;
   }
-  ngOnDestroy() {
-    // this.paramsSub.unsubscribe();
-  }
+
   // Send request to the calculation service
-  calculate() {
+  onSubmit() {
     // return if form is invalid
     if (this.inputForm.invalid) {
       return;
     }
     // Make Http request
     this.data
-      .get_result(this.description.id, this.firstnumber, this.secondnumber)
+      .get_result(this.id, this.firstnumber, this.secondnumber)
       .subscribe((res: any) => {
         // depends on selected operation type read corresponding responce
-        switch (this.description.id) {
+        switch (this.id) {
           case 1: {
             this.additionResult = new AdditionResult();
             this.additionResult.firstTerm = this.firstnumber;

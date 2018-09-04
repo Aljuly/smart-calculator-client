@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { JsonConvert } from 'json2typescript';
+import { User } from '../_models';
 
 @Injectable()
 export class AuthenticationService {
+  jsonConvert: JsonConvert;
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
-      .pipe(map(user => {
+    return this.http.post<any>(`http://localhost:3000/users/authenticate`, { username: username, password: password })
+      .pipe(map(res => {
+        // Check the detailed reference in the chapter "JsonConvert class properties and methods"
+        this.jsonConvert = new JsonConvert();
+        // this.jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
+        this.jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
+        // json converter returns an Array!
+        console.log(JSON.stringify(res));
+        // const user = this.jsonConvert.deserialize(JSON.stringify(res), User)[0];
+        const user = res;
+        console.log(user.login + ' is authenticated!');
         // login successful if there's a jwt token in the response
-        if (user && user.token) {
+        if (!user.isEmpty && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
         }

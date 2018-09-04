@@ -1,7 +1,7 @@
 <!-- Addition and subtraction -->
 <article class="operation-def">
   <h1> Calculation plot </h1>
-  <div>
+  <div *ngIf="!additionResult.isEmpty" >
     <table cellspacing="" style="margin: auto">
       <tbody>
         <tr *ngIf="addition">

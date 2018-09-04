@@ -664,6 +664,12 @@ label {
   font-size: .9rem;
 }
 
+/* to display error messages from the inputs */
+.invalid-feedback {
+  display: block;
+}
+/*===========================================*/
+
 input.form-control {
   border-radius: 0;
 }

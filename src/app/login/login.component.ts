@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService, AuthenticationService, ComunicationService } from '../_services';
+import { AlertComponent } from '../_directives';
 
 @Component({templateUrl: './login.component.html'})
 export class LoginComponent implements OnInit {
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'operation/1';
   }
 
   // convenience getter for easy access to form fields
@@ -50,13 +51,19 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.comunicationService.userMessage = data;
+          this.comunicationService.changeLoggedInUser(data);
           this.router.navigate([this.returnUrl]);
+          this.activeModal.dismiss();
         },
         error => {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  onRegisterClick() {
+    this.router.navigate(['/register']);
+    this.activeModal.dismiss();
   }
 }
 

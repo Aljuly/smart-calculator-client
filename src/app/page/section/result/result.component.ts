@@ -9,6 +9,7 @@ import { ComunicationService } from '../../../_services';
 })
 export class ResultComponent implements OnInit {
   description: Description;
+  id: number;
   additionResult: AdditionResult;
   multiplicationResult: MultiplicationResult;
   divisionResult: DivisionResult;
@@ -16,7 +17,9 @@ export class ResultComponent implements OnInit {
   // Subscribe on changes
   ngOnInit(): void {
     this.comunicationService.DescriptionMessage
-    .subscribe(description => this.description = description);
+    .subscribe((res) => {
+      this.id = res.id;
+    });
     this.comunicationService.additionResultMessage
     .subscribe(additionResult => this.additionResult = additionResult);
     this.comunicationService.multiplicationResultMessage

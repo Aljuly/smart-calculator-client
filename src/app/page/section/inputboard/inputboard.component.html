@@ -1,15 +1,18 @@
 <article class="input-data">
 	<h1>Input data</h1>
-  <form [formGroup] = "inputForm">
+  <form [formGroup] = "inputForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <div class="row">
         <div class="col-2">
-          <input type="text" formControlName="firstnumber" [pattern]="[1-9][0-9]" class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && f.firstnumber?.pattern }"/>
-          <div *ngIf="f.firstnumber?.pattern">Entered value not valid!</div>
+          <input type="text" formControlName="firstnumber" 
+                 [ngClass]="{ 'is-invalid': submitted && f.firstnumber.errors }" class="form-control"/>
+          <div *ngIf="submitted && f.firstnumber.errors " class="invalid-feedback">
+            <div *ngIf="f.firstnumber.errors.required">Value required</div>
+            <div *ngIf="f.firstnumber.errors.pattern">Entered value not valid</div>
+          </div>
         </div>
         <div class="col-md-0.5">
-          <div class="col-0.5" [ngSwitch]="description.id">
+          <div class="col-0.5" [ngSwitch]="id">
             <div *ngSwitchCase="1"><i class="fas fa-plus"></i></div>
             <div *ngSwitchCase="2"><i class="fas fa-minus"></i></div>
             <div *ngSwitchCase="3"><i class="fas fa-times"></i></div>
@@ -18,14 +21,17 @@
           </div>
         </div>
         <div class="col-2">
-          <input type="text" formControlName="secondnumber" [pattern]="[1-9][0-9]" class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && f.secondnumber?.pattern }"/>
-          <div *ngIf="f.secondnumber?.pattern">Entered value not valid!</div>
+          <input type="text" formControlName="secondnumberr" 
+                [ngClass]="{ 'is-invalid': submitted && f.secondnumber.errors }" class="form-control"/>
+            <div *ngIf="submitted && f.secondnumber.errors " class="invalid-feedback">
+              <div *ngIf="f.secondnumber.errors.required">Value required</div>
+              <div *ngIf="f.secondnumber.errors.pattern">Entered value not valid</div>
+            </div>
         </div>
         <div class="col-3">
-          <a class="btn btn-primary" (click) = "calculate()">
+          <button class="btn btn-primary" type="submit"  value="submit" >
             <i class="fas fa-equals"></i>
-          </a>
+          </button>
         </div>
       </div>
     </div>

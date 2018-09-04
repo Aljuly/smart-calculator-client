@@ -7,9 +7,13 @@ import { JsonObject, JsonProperty } from 'json2typescript';
  */
 @JsonObject('MultiplicationResult')
 export class MultiplicationResult {
+    @JsonProperty('firstfactor', String)
     private _firstFactor: string;
+    @JsonProperty('secondfactor', String)
     private _secondFactor: string;
+    @JsonProperty('product', String)
     private _product: string;
+    @JsonProperty('steps', [String])
     private _steps: string[];
     constructor() {
         this._firstFactor = void 0;
@@ -20,28 +24,24 @@ export class MultiplicationResult {
     public get steps(): string[] {
         return this._steps;
     }
-    @JsonProperty('steps', [String])
     public set steps(value: string[]) {
         this._steps = value;
     }
     public get product(): string {
         return this._product;
     }
-    @JsonProperty('product', String)
     public set product(value: string) {
         this._product = value;
     }
     public get secondFactor(): string {
         return this._secondFactor;
     }
-    @JsonProperty('secondfactor', String)
     public set secondFactor(value: string) {
         this._secondFactor = value;
     }
     public get firstFactor(): string {
         return this._firstFactor;
     }
-    @JsonProperty('firstfactor', String)
     public set firstFactor(value: string) {
         this._firstFactor = value;
     }

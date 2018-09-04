@@ -26,14 +26,18 @@
       "description": "Define periodic part"
     }
   ],
-  "comments": [
+  "users": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "login": "bruno",
+      "name": "bruno",
+      "email": "bruno@email.com",
+      "token": "bruno"
+    },
+    {
+      "login": "nilson",
+      "name": "nilson",
+      "email": "nilson@email.com",
+      "token": "nilson"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AlertService, UserService } from '../_services';
+import { AlertComponent } from '../_directives';
 
 @Component({templateUrl: './register.component.html'})
 export class RegisterComponent implements OnInit {
@@ -23,7 +24,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       userName: ['', Validators.required],
       login: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -46,11 +47,17 @@ export class RegisterComponent implements OnInit {
         data => {
           this.alertService.success('Registration successful', true);
           this.router.navigate(['/login']);
+          this.activeModal.dismiss();
         },
         error => {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  onLoginClick() {
+    this.router.navigate(['/login']);
+    this.activeModal.dismiss();
   }
 }
 
