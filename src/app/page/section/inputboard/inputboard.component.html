@@ -1,6 +1,6 @@
 <article class="input-data">
 	<h1>Input data</h1>
-  <form [formGroup] = "inputForm" (ngSubmit)="onSubmit()">
+  <form [formGroup] = "inputForm" (ngSubmit)="onSubmit()" class="text-left form-validate">
     <div class="form-group">
       <div class="row">
         <div class="col-2">
@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="col-2">
-          <input type="text" formControlName="secondnumberr" 
+          <input type="text" formControlName="secondnumber" 
                 [ngClass]="{ 'is-invalid': submitted && f.secondnumber.errors }" class="form-control"/>
             <div *ngIf="submitted && f.secondnumber.errors " class="invalid-feedback">
               <div *ngIf="f.secondnumber.errors.required">Value required</div>

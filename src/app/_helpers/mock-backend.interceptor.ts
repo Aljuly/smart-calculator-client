@@ -15,7 +15,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
-            // authenticate
+            // mock authenticate
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
                 // find if any user matches login credentials
                 const filteredUsers = users.filter(user => {
@@ -38,7 +38,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            // register user
+            // mock register user
             if (request.url.endsWith('/users/register') && request.method === 'POST') {
                 // get new user object from post body
                 const newUser = request.body;
@@ -58,11 +58,12 @@ export class MockBackendInterceptor implements HttpInterceptor {
                 return of(new HttpResponse({ status: 200 }));
             }
 
-            // mock add operation
+            // mock operations
             if (request.url.endsWith('/calculate') && request.method === 'GET') {
-                switch (request.body.id) {
+                switch (Number(request.params.get('id'))) {
                     case 1: {
                         const body = {
+                            id: 1,
                             firstTerm: '12525',
                             secondTerm: '16894',
                             sum: '29419'
@@ -71,6 +72,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
                     }
                     case 2: {
                         const body = {
+                            id: 2,
                             firstTerm: '16894',
                             secondTerm: '12525',
                             sum: '4369'
@@ -78,7 +80,14 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         return of(new HttpResponse({ status: 200, body: body }));
                     }
                     case 3: {
-                        break;
+                        const body = {
+                            id: 3,
+                            firstfactor: '12345',
+                            secondfactor: '324',
+                            product: '3999780',
+                            steps: ['49380', '24690', '37035']
+                        };
+                        return of(new HttpResponse({ status: 200, body: body }));
                     }
                     case 4: {
                         break;

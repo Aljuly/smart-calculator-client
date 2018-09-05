@@ -1,5 +1,4 @@
 <article class = "output-data">
-    <h1>Result</h1>
     <div style="text-align: center">
         <span [ngSwitch]="id">
             <p *ngSwitchCase="1">
@@ -9,7 +8,7 @@
                 <app-addition-component [additionResult] = "additionResult"></app-addition-component>
             </p>
             <p *ngSwitchCase="3">
-                <app-multiplycation-formatter [multiplycationResult] = "multiplycationResult"></app-multiplycation-formatter>   
+                <app-multiplycation-formatter [multiplicationResult] = "multiplicationResult"></app-multiplycation-formatter>   
             </p>
             <p *ngSwitchCase="4">
                 <app-division-formatter [divisionResult] = "divisionResult"></app-division-formatter>

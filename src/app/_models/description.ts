@@ -2,7 +2,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
 
 @JsonObject('Description')
 export class Description {
-    @JsonProperty('id', String, )
+    @JsonProperty('id', String)
     private _id: number;
     @JsonProperty('title', String)
     private _title: string;

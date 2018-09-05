@@ -7,28 +7,31 @@ import { MultiplicationResult } from '../../../../_models';
   styleUrls: ['./multiplycation-formatter.component.css']
 })
 export class MultiplycationFormatterComponent implements OnChanges {
-  @Input() multiplycationResult: MultiplicationResult;
-  firstFactor: string;
-  secondFactor: string;
-  product: string;
-  stub = '';
-  stepsOut: string[];
+  @Input() multiplicationResult: MultiplicationResult;
+  firstFactor: string[];
+  secondFactor: string[];
+  product: string[];
+  stub: string[];
+  stepsOut: any[];
 
   constructor() { }
 
   ngOnChanges() {
-    const m = (this.multiplycationResult.product.length + 1) -
-        Math.max(this.multiplycationResult.firstFactor.length,
-          this.multiplycationResult.secondFactor.length);
-    const f = (this.multiplycationResult.product.length - this.multiplycationResult.firstFactor.length) - 1 - m;
-    const s = (this.multiplycationResult.product.length - this.multiplycationResult.secondFactor.length) - 1 - m;
-    this.firstFactor = this.assemblyString(f, ' ').concat(this.multiplycationResult.firstFactor);
-    this.secondFactor = this.assemblyString(s, ' ').concat(this.multiplycationResult.secondFactor);
-    this.stub = this.assemblyString(m, ' ');
-    for (let k = 0; k < this.multiplycationResult.steps.length - 1; k++) {
-      if (this.multiplycationResult.steps[k] !== '0') {
-        this.stepsOut.push(this.assemblyString(k, ' ').concat(this.multiplycationResult.steps[k],
-          this.assemblyString(this.multiplycationResult.product.length - (this.multiplycationResult.steps[k].length + 1), ' ')));
+    if (this.multiplicationResult.isEmpty()) { return; }
+    this.stepsOut = new Array();
+    const m = (this.multiplicationResult.product.length + 1) -
+        Math.max(this.multiplicationResult.firstFactor.length,
+          this.multiplicationResult.secondFactor.length);
+    const f = (this.multiplicationResult.product.length - this.multiplicationResult.firstFactor.length) - 1;
+    const s = (this.multiplicationResult.product.length - this.multiplicationResult.secondFactor.length);
+    this.firstFactor = Array.from(this.assemblyString(f, ' ').concat(this.multiplicationResult.firstFactor));
+    this.secondFactor = Array.from(this.assemblyString(s, ' ').concat(this.multiplicationResult.secondFactor));
+    this.stub = Array.from(this.assemblyString(m, ' '));
+    this.product = Array.from(this.multiplicationResult.product);
+    for (let k = 0; k < this.multiplicationResult.steps.length; k++) {
+      if (this.multiplicationResult.steps[k] !== '0') {
+        this.stepsOut.push(Array.from(this.assemblyString(k, ' ').concat(this.multiplicationResult.steps[k],
+          this.assemblyString(this.multiplicationResult.product.length - (this.multiplicationResult.steps[k].length + 1), ' '))));
       }
     }
   }
