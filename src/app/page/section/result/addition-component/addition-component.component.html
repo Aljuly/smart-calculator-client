@@ -5,14 +5,17 @@
     <table cellspacing="" style="margin: auto">
       <tbody style="font-size:1.3em">
         <tr *ngIf="additionResult.isAddition()">
+          <td *ngFor= "let c of stub | slice: 0" class="t-cell" style="min-width:11px">{{c}}</td>
           <td rowspan="2" class="t-cell">+</td>
           <td *ngFor="let c of firstTerm | slice: 0" class="t-cell">{{c}}</td>
         </tr>
         <tr *ngIf="additionResult.isSubtraction()">
+          <td *ngFor= "let c of stub | slice: 0" class="t-cell" style="min-width:11px">{{c}}</td>
           <td rowspan="2" class="t-cell">-</td>
           <td *ngFor="let c of firstTerm">{{c}}</td>
         </tr>
         <tr>
+          <td *ngFor= "let c of stub | slice: 0" class="t-cell" style="min-width:11px">{{c}}</td>
           <td *ngFor="let c of secondTerm | slice: 0" class="t-cell">{{c}}</td>
         </tr>
         <tr>

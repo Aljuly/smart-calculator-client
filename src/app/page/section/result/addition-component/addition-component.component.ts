@@ -11,23 +11,34 @@ export class AdditionComponent implements OnChanges {
   firstTerm: string[];
   secondTerm: string[];
   sum: string[];
-  stub: string;
+  stub: string[];
   constructor() { }
 
   ngOnChanges() {
     if (this.additionResult.isEmpty()) { return; }
-    const m = (this.additionResult.sum.length + 1) - Math.max(this.additionResult.firstTerm.length,
-      this.additionResult.secondTerm.length);
-    const f = (this.additionResult.sum.length - this.additionResult.firstTerm.length) + 1 - m;
-    const s = (this.additionResult.sum.length - this.additionResult.secondTerm.length) + 1 - m;
+    const m = Math.max(
+      this.additionResult.firstTerm.length + 1,
+      this.additionResult.secondTerm.length + 1,
+      this.additionResult.sum.length);
+    let z = Math.max(
+      this.additionResult.firstTerm.length,
+      this.additionResult.secondTerm.length) - this.additionResult.sum.length;
+    if (z < 0) { z = 0; }
+    const f = m - this.additionResult.firstTerm.length - z;
+    const s = m - this.additionResult.secondTerm.length - z;
+    const r = m - this.additionResult.sum.length - z + 1;
     this.firstTerm = Array.from(this.assemblyString(f, ' ').concat(this.additionResult.firstTerm));
     this.secondTerm = Array.from(this.assemblyString(s, ' ').concat(this.additionResult.secondTerm));
-    this.stub = this.assemblyString(m, ' ');
-    this.sum = Array.from(this.stub.concat(this.additionResult.sum));
+    this.stub = Array.from(this.assemblyString(z, ' '));
+    this.sum = Array.from(this.assemblyString(r, ' ').concat(this.additionResult.sum));
   }
   // Utility function that forms string from given char of given length
   private assemblyString(numberOfSymbols: number, symbol: string) {
     if (numberOfSymbols === 0) { return ''; }
-    return new Array(numberOfSymbols).join(symbol);
+    let result = '';
+    for (let i = 0; i < numberOfSymbols; i++) {
+        result += symbol;
+    }
+    return result;
   }
 }
