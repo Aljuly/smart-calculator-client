@@ -90,7 +90,20 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         return of(new HttpResponse({ status: 200, body: body }));
                     }
                     case 4: {
-                        break;
+                        const body = {
+                            id: 4,
+                            dividend: '630440',
+                            divisor: '610',
+                            quotient: '1033',
+                            reminder: '310',
+                            alert: '',
+                            fraction: '',
+                            steps: [{firstNumber: '630', secondNumber: '610', difference: '20'},
+                            {firstNumber: '2044', secondNumber: '1830', difference: '214'},
+                            {firstNumber: '2140', secondNumber: '1830', difference: '310'},
+                            {firstNumber: '310', secondNumber: '0', difference: '310'}]
+                        };
+                        return of(new HttpResponse({ status: 200, body: body }));
                     }
                     case 5: {
                         break;

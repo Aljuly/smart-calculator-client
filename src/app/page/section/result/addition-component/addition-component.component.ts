@@ -17,19 +17,19 @@ export class AdditionComponent implements OnChanges {
   ngOnChanges() {
     if (this.additionResult.isEmpty()) { return; }
     const m = Math.max(
-      this.additionResult.firstTerm.length + 1,
-      this.additionResult.secondTerm.length + 1,
-      this.additionResult.sum.length);
-    let z = Math.max(
       this.additionResult.firstTerm.length,
-      this.additionResult.secondTerm.length) - this.additionResult.sum.length;
-    if (z < 0) { z = 0; }
-    const f = m - this.additionResult.firstTerm.length - z;
-    const s = m - this.additionResult.secondTerm.length - z;
-    const r = m - this.additionResult.sum.length - z + 1;
+      this.additionResult.secondTerm.length);
+    const f = m - this.additionResult.firstTerm.length;
+    const s = m - this.additionResult.secondTerm.length;
+    let z = this.additionResult.sum.length - m - 1;
+    let r = 0;
+    if (z < 0) {
+      r = -z;
+      z = 0;
+    }
+    this.stub = Array.from(this.assemblyString(z, ' '));
     this.firstTerm = Array.from(this.assemblyString(f, ' ').concat(this.additionResult.firstTerm));
     this.secondTerm = Array.from(this.assemblyString(s, ' ').concat(this.additionResult.secondTerm));
-    this.stub = Array.from(this.assemblyString(z, ' '));
     this.sum = Array.from(this.assemblyString(r, ' ').concat(this.additionResult.sum));
   }
   // Utility function that forms string from given char of given length

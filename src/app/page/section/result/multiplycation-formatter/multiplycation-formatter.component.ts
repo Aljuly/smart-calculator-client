@@ -21,23 +21,23 @@ export class MultiplycationFormatterComponent implements OnChanges {
     // some kind of index magik
     this.stepsOut = new Array();
     const m = Math.max(
-      this.multiplicationResult.product.length,
-      this.multiplicationResult.firstFactor.length + 1,
-      this.multiplicationResult.secondFactor.length + 1);
-    let z = Math.max(
-      this.multiplicationResult.firstFactor.length + 1,
-      this.multiplicationResult.secondFactor.length + 1) - this.multiplicationResult.product.length;
-    if (z < 0) { z = 0; }
-    const f = m - this.multiplicationResult.firstFactor.length - z;
-    const s = m - this.multiplicationResult.secondFactor.length - z;
-    const p = m - this.multiplicationResult.product.length;
+      this.multiplicationResult.firstFactor.length,
+      this.multiplicationResult.secondFactor.length) + 1;
+    const f = m - this.multiplicationResult.firstFactor.length;
+    const s = m - this.multiplicationResult.secondFactor.length;
+    let z = this.multiplicationResult.product.length - m + 1;
+    let r = 0;
+    if (z < 0) {
+      r = - z;
+      z = 0;
+    }
+    this.stub = Array.from(this.assemblyString(z, ' '));
     this.firstFactor = Array.from(this.assemblyString(f, ' ').concat(this.multiplicationResult.firstFactor));
     this.secondFactor = Array.from(this.assemblyString(s, ' ').concat(this.multiplicationResult.secondFactor));
-    this.product = Array.from(this.assemblyString(p, ' ').concat(this.multiplicationResult.product));
-    this.stub = Array.from(this.assemblyString(z, ' '));
+    this.product = Array.from(this.assemblyString(r, ' ').concat(this.multiplicationResult.product));
     for (let k = 0; k < this.multiplicationResult.steps.length; k++) {
       if (this.multiplicationResult.steps[k] !== '0') {
-        const l = m - (this.multiplicationResult.steps[k].length + k);
+        const l = m + z - (this.multiplicationResult.steps[k].length + k);
         this.stepsOut.push(Array.from(this.assemblyString(l, ' ').concat(this.multiplicationResult.steps[k],
           this.assemblyString(k, ' '))));
       }

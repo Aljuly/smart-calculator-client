@@ -8,6 +8,8 @@ import { JsonObject, JsonProperty } from 'json2typescript';
  */
 @JsonObject('DivisionResult')
 export class DivisionResult {
+    @JsonProperty('id', Number)
+    private _id: number;
     @JsonProperty('dividend', String)
     private _dividend: string;
     @JsonProperty('divisor', String)
@@ -24,6 +26,7 @@ export class DivisionResult {
     private _steps: Step[];
 
     constructor() {
+        this._id = void 0;
         this._dividend = void 0;
         this._divisor = void 0;
         this._dividend = void 0;
@@ -32,6 +35,12 @@ export class DivisionResult {
         this._alert = void 0;
         this._fraction = void 0;
         this._steps = void 0;
+    }
+    public get id(): number {
+        return this._id;
+    }
+    public set id(value: number) {
+        this._id = value;
     }
     public set dividend(value: string) {
         this._dividend = value;
@@ -74,5 +83,9 @@ export class DivisionResult {
     }
     public set steps(value: Step[]) {
         this._steps = value;
+    }
+    // Define whereas object is empty
+    public isEmpty(): boolean {
+        return (this._dividend == null || this._divisor == null);
     }
 }

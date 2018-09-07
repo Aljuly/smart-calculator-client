@@ -8,45 +8,53 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class DivisionFormatterComponent implements OnChanges {
   @Input() divisionResult: DivisionResult;
-  second: string;
-  stepsOut: Step[];
-  result: string;
+  firstNumber: string[];
+  secondNumber: string[];
+  second: string[];
+  stepsOut: any[];
+  result: string[];
   constructor() {}
 
   ngOnChanges() {
+    if (this.divisionResult.isEmpty()) { return; }
     let j: number;
     let diff: number;
     let i = 0;
     // lets make a first step
-    let firstNumber: string = this.divisionResult.steps[0].firstnumber;
-    let secondNumber: string = this.divisionResult.steps[0].secondnumber;
-    this.result = this.divisionResult.quotient.concat(this.formatFraction(this.divisionResult.fraction,
-      Number(this.divisionResult.divisor)));
+    this.firstNumber = Array.from(this.divisionResult.steps[0].firstnumber);
+    this.secondNumber = Array.from(this.divisionResult.steps[0].secondnumber);
+    this.result = Array.from(this.divisionResult.quotient.concat(this.formatFraction(this.divisionResult.fraction,
+      Number(this.divisionResult.divisor))));
     let difference: string = this.divisionResult.steps[0].difference;
-    this.second = this.assemblyString(firstNumber.length - secondNumber.length + 1, ' ')
-      .concat(secondNumber);
-    j = firstNumber.length + 1;
+    this.second = Array.from(this.assemblyString(this.firstNumber.length - this.secondNumber.length + 1, ' ')
+      .concat(this.divisionResult.steps[0].secondnumber));
+    j = this.firstNumber.length + 1;
     // define difference for the next step
     diff = Number(difference);
+    this.stepsOut = new Array();
     for (let k = 1; k < this.divisionResult.steps.length; k++) {
       i++;
       if (i === this.divisionResult.steps.length) {
-        firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
-        j += firstNumber.length - String(diff).length;
+        this.firstNumber = Array.from(this.removeLeadingZero(this.divisionResult.steps[k].firstnumber));
+        j += this.firstNumber.length - String(diff).length;
         if (difference.length === 0) { j++; }
-        this.stepsOut.push(new Step(firstNumber, '', ''));
+        this.stepsOut.push(new Step(this.divisionResult.steps[k].firstnumber, '', ''));
       } else {
-        firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
-        secondNumber = this.divisionResult.steps[k].secondnumber;
+        this.firstNumber = Array.from(this.removeLeadingZero(this.divisionResult.steps[k].firstnumber));
+        this.secondNumber = Array.from(this.divisionResult.steps[k].secondnumber);
         difference = this.divisionResult.steps[k].difference;
         // increase indent on count of added digits
-        j += firstNumber.length - String(diff).length;
+        j += this.firstNumber.length - String(diff).length;
         // if the difference is 0 than omit it
         if (diff === 0) { j++; }
         // define the difference for the next step
         diff = Number(difference);
-        this.stepsOut.push(new Step(this.assemblyString(j, ' ').concat(firstNumber),
-          this.assemblyString(j, ' ').concat(secondNumber), ''));
+        // one step to output
+        const stepOut = {
+          firstnumber: Array.from(this.assemblyString(j, ' ').concat(this.divisionResult.steps[k].firstnumber)),
+          secondnumber: Array.from(this.assemblyString(j, ' ').concat(this.divisionResult.steps[k].secondnumber))
+        };
+        this.stepsOut.push(stepOut);
       }
     }
   }
@@ -59,7 +67,12 @@ export class DivisionFormatterComponent implements OnChanges {
   }
   // Utility function that forms string from given char of given length
   private assemblyString(numberOfSymbols: number, symbol: string) {
-    return new Array(numberOfSymbols).join(symbol);
+    if (numberOfSymbols === 0) { return ''; }
+    let result = '';
+    for (let i = 0; i < numberOfSymbols; i++) {
+        result += symbol;
+    }
+    return result;
   }
   // formatting fraction with periodic part
   private formatFraction(fraction: string, divisor: number) {
