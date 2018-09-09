@@ -8,8 +8,8 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class DivisionFormatterComponent implements OnChanges {
   @Input() divisionResult: DivisionResult;
-  firstNumber: string[];
-  secondNumber: string[];
+  dividend: string[];
+  divisor: string[];
   second: string[];
   stepsOut: any[];
   result: string[];
@@ -21,38 +21,41 @@ export class DivisionFormatterComponent implements OnChanges {
     let diff: number;
     let i = 0;
     // lets make a first step
-    this.firstNumber = Array.from(this.divisionResult.steps[0].firstnumber);
-    this.secondNumber = Array.from(this.divisionResult.steps[0].secondnumber);
+    this.dividend = Array.from(this.divisionResult.dividend);
+    this.divisor = Array.from(this.divisionResult.divisor)
+    let firstNumber = this.divisionResult.steps[0].firstnumber;
+    let secondNumber = this.divisionResult.steps[0].secondnumber;
+    this.second = Array.from(this.assemblyString(firstNumber.length - secondNumber.length, ' ')
+      .concat(this.divisionResult.steps[0].secondnumber));
     this.result = Array.from(this.divisionResult.quotient.concat(this.formatFraction(this.divisionResult.fraction,
       Number(this.divisionResult.divisor))));
     let difference: string = this.divisionResult.steps[0].difference;
-    this.second = Array.from(this.assemblyString(this.firstNumber.length - this.secondNumber.length + 1, ' ')
-      .concat(this.divisionResult.steps[0].secondnumber));
-    j = this.firstNumber.length + 1;
+
+    j = firstNumber.length + 1;
     // define difference for the next step
     diff = Number(difference);
     this.stepsOut = new Array();
     for (let k = 1; k < this.divisionResult.steps.length; k++) {
       i++;
       if (i === this.divisionResult.steps.length) {
-        this.firstNumber = Array.from(this.removeLeadingZero(this.divisionResult.steps[k].firstnumber));
-        j += this.firstNumber.length - String(diff).length;
+        firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
+        j += firstNumber.length - String(diff).length;
         if (difference.length === 0) { j++; }
         this.stepsOut.push(new Step(this.divisionResult.steps[k].firstnumber, '', ''));
       } else {
-        this.firstNumber = Array.from(this.removeLeadingZero(this.divisionResult.steps[k].firstnumber));
-        this.secondNumber = Array.from(this.divisionResult.steps[k].secondnumber);
+        firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
+        secondNumber = this.divisionResult.steps[k].secondnumber;
         difference = this.divisionResult.steps[k].difference;
         // increase indent on count of added digits
-        j += this.firstNumber.length - String(diff).length;
+        j += firstNumber.length - String(diff).length;
         // if the difference is 0 than omit it
         if (diff === 0) { j++; }
         // define the difference for the next step
         diff = Number(difference);
         // one step to output
         const stepOut = {
-          firstnumber: Array.from(this.assemblyString(j, ' ').concat(this.divisionResult.steps[k].firstnumber)),
-          secondnumber: Array.from(this.assemblyString(j, ' ').concat(this.divisionResult.steps[k].secondnumber))
+          firstnumber: Array.from(this.assemblyString(j, ' ').concat(firstNumber)),
+          secondnumber: Array.from(this.assemblyString(j, ' ').concat(secondNumber))
         };
         this.stepsOut.push(stepOut);
       }
