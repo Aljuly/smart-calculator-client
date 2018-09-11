@@ -22,16 +22,17 @@ export class DivisionFormatterComponent implements OnChanges {
     let i = 0;
     // lets make a first step
     this.dividend = Array.from(this.divisionResult.dividend);
-    this.divisor = Array.from(this.divisionResult.divisor)
+    this.divisor = Array.from(this.divisionResult.divisor);
     let firstNumber = this.divisionResult.steps[0].firstnumber;
     let secondNumber = this.divisionResult.steps[0].secondnumber;
+    // assembly strings to output
     this.second = Array.from(this.assemblyString(firstNumber.length - secondNumber.length, ' ')
-      .concat(this.divisionResult.steps[0].secondnumber));
+      .concat(this.divisionResult.steps[0].secondnumber)
+      .concat(this.assemblyString(this.dividend.length - firstNumber.length, ' ')));
     this.result = Array.from(this.divisionResult.quotient.concat(this.formatFraction(this.divisionResult.fraction,
       Number(this.divisionResult.divisor))));
     let difference: string = this.divisionResult.steps[0].difference;
-
-    j = firstNumber.length + 1;
+    j = firstNumber.length;
     // define difference for the next step
     diff = Number(difference);
     this.stepsOut = new Array();
@@ -41,7 +42,11 @@ export class DivisionFormatterComponent implements OnChanges {
         firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
         j += firstNumber.length - String(diff).length;
         if (difference.length === 0) { j++; }
-        this.stepsOut.push(new Step(this.divisionResult.steps[k].firstnumber, '', ''));
+        const stepOut = {
+          firstnumber: Array.from(this.assemblyString(j - firstNumber.length, ' ').concat(firstNumber)),
+          secondnumber: Array.from('')
+        };
+        this.stepsOut.push(stepOut);
       } else {
         firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
         secondNumber = this.divisionResult.steps[k].secondnumber;
@@ -54,8 +59,8 @@ export class DivisionFormatterComponent implements OnChanges {
         diff = Number(difference);
         // one step to output
         const stepOut = {
-          firstnumber: Array.from(this.assemblyString(j, ' ').concat(firstNumber)),
-          secondnumber: Array.from(this.assemblyString(j, ' ').concat(secondNumber))
+          firstnumber: Array.from(this.assemblyString(j - firstNumber.length, ' ').concat(firstNumber)),
+          secondnumber: Array.from(this.assemblyString(j - secondNumber.length, ' ').concat(secondNumber))
         };
         this.stepsOut.push(stepOut);
       }
