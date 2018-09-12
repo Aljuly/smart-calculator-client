@@ -25,6 +25,10 @@ export class DivisionFormatterComponent implements OnChanges {
     this.divisor = Array.from(this.divisionResult.divisor);
     let firstNumber = this.divisionResult.steps[0].firstnumber;
     let secondNumber = this.divisionResult.steps[0].secondnumber;
+    // define identations
+    let m: number;
+    let f: number;
+    let s: number;
     // assembly strings to output
     this.second = Array.from(this.assemblyString(firstNumber.length - secondNumber.length, ' ')
       .concat(this.divisionResult.steps[0].secondnumber)
@@ -44,13 +48,17 @@ export class DivisionFormatterComponent implements OnChanges {
         if (difference.length === 0) { j++; }
         const stepOut = {
           firstnumber: Array.from(this.assemblyString(j - firstNumber.length, ' ').concat(firstNumber)),
-          secondnumber: Array.from('')
+          secondnumber: Array.from(''),
+          stub: Array.from('')
         };
         this.stepsOut.push(stepOut);
       } else {
         firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
         secondNumber = this.divisionResult.steps[k].secondnumber;
         difference = this.divisionResult.steps[k].difference;
+        m = Math.max(firstNumber.length, secondNumber.length);
+        f = m - firstNumber.length;
+        s = m - secondNumber.length;
         // increase indent on count of added digits
         j += firstNumber.length - String(diff).length;
         // if the difference is 0 than omit it
@@ -59,8 +67,9 @@ export class DivisionFormatterComponent implements OnChanges {
         diff = Number(difference);
         // one step to output
         const stepOut = {
-          firstnumber: Array.from(this.assemblyString(j - firstNumber.length, ' ').concat(firstNumber)),
-          secondnumber: Array.from(this.assemblyString(j - secondNumber.length, ' ').concat(secondNumber))
+          firstnumber: Array.from(this.assemblyString(f, ' ').concat(firstNumber)),
+          secondnumber: Array.from(this.assemblyString(s, ' ').concat(secondNumber)),
+          stub: Array.from(this.assemblyString(j - m, ' '))
         };
         this.stepsOut.push(stepOut);
       }
