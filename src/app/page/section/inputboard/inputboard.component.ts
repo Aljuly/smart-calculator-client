@@ -46,6 +46,11 @@ export class InputBoardComponent implements OnInit {
     return this.inputForm.controls;
   }
 
+  // formreset
+  onResetClick(): void {
+    this.inputForm.reset();
+  }
+
   // Send request to the calculation service
   onSubmit() {
     this.submitted = true;

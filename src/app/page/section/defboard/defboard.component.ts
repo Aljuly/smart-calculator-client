@@ -17,7 +17,7 @@ export class DefboardComponent implements OnInit {
       this.title = res.title;
       this.info = res.description;
       console.log(this.title + ' received in description!');
-      this.crd.detectChanges();
+      // this.crd.detectChanges();
     });
   }
 }

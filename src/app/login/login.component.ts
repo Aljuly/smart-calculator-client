@@ -65,6 +65,11 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
     this.activeModal.dismiss();
   }
+
+  onDismissClick() {
+    this.router.navigate([this.returnUrl]);
+    this.activeModal.dismiss('Cross click');
+  }
 }
 
 @Component({

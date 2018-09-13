@@ -21,7 +21,6 @@ export class MockBackendInterceptor implements HttpInterceptor {
                 const filteredUsers = users.filter(user => {
                     return user.userName === request.body.username && user.password === request.body.password;
                 });
-
                 if (filteredUsers.length) {
                     // if login details are valid return 200 OK with user details and fake jwt token
                     const user = filteredUsers[0];
@@ -44,7 +43,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
                 const newUser = request.body;
 
                 // validation
-                const duplicateUser = users.filter(user => user.username === newUser.username).length;
+                const duplicateUser = users.filter(user => user.username === newUser.userName).length;
                 if (duplicateUser) {
                     return throwError({ error: { message: 'Username "' + newUser.username + '" is already registered!' } });
                 }
@@ -106,7 +105,22 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         return of(new HttpResponse({ status: 200, body: body }));
                     }
                     case 5: {
-                        break;
+                        const body = {
+                            id: 5,
+                            dividend: '12',
+                            divisor: '123',
+                            quotient: '0',
+                            reminder: '12',
+                            alert: '',
+                            fraction: '09756',
+                            steps: [{firstNumber: '12', secondNumber: '0', difference: '12'},
+                            {firstNumber: '1200', secondNumber: '1107', difference: '93'},
+                            {firstNumber: '930', secondNumber: '861', difference: '69'},
+                            {firstNumber: '690', secondNumber: '615', difference: '75'},
+                            {firstNumber: '750', secondNumber: '738', difference: '12'},
+                            {firstNumber: '12', secondNumber: '0', difference: '12'}]
+                        };
+                        return of(new HttpResponse({ status: 200, body: body }));
                     }
                 }
             }

@@ -19,13 +19,13 @@ export class DivisionFormatterComponent implements OnChanges {
     if (this.divisionResult.isEmpty()) { return; }
     let j: number;
     let diff: number;
-    let i = 0;
+    let i = 1;
     // lets make a first step
     this.dividend = Array.from(this.divisionResult.dividend);
     this.divisor = Array.from(this.divisionResult.divisor);
     let firstNumber = this.divisionResult.steps[0].firstnumber;
     let secondNumber = this.divisionResult.steps[0].secondnumber;
-    // define identations
+    // identations variables
     let m: number;
     let f: number;
     let s: number;
@@ -47,7 +47,7 @@ export class DivisionFormatterComponent implements OnChanges {
         j += firstNumber.length - String(diff).length;
         if (difference.length === 0) { j++; }
         const stepOut = {
-          firstnumber: Array.from(this.assemblyString(j - firstNumber.length, ' ').concat(firstNumber)),
+          firstnumber: Array.from(this.assemblyString(j - firstNumber.length + 1, ' ').concat(firstNumber)),
           secondnumber: Array.from(''),
           stub: Array.from('')
         };
@@ -56,6 +56,7 @@ export class DivisionFormatterComponent implements OnChanges {
         firstNumber = this.removeLeadingZero(this.divisionResult.steps[k].firstnumber);
         secondNumber = this.divisionResult.steps[k].secondnumber;
         difference = this.divisionResult.steps[k].difference;
+        // define identation on the current step
         m = Math.max(firstNumber.length, secondNumber.length);
         f = m - firstNumber.length;
         s = m - secondNumber.length;
@@ -95,7 +96,7 @@ export class DivisionFormatterComponent implements OnChanges {
   private formatFraction(fraction: string, divisor: number) {
     let denominator: number;
     if (fraction.length === 0) { return ''; }
-    fraction.concat(' ');
+    fraction = fraction.concat(' ');
     if (divisor % 2 === 0) {
       for (let nines = 1; nines < fraction.length; nines++) {
         for (let zeros = 1; zeros + nines < fraction.length - nines; zeros++) {
