@@ -12,7 +12,7 @@ export class UserService {
   }
 
   register(user: User) {
-    return this.http.post(`http://localhost:3000/users/register`, user);
+    return this.http.post(`http://localhost:8080/smart-calculator/users/register`, user);
   }
 
   update(user: User) {

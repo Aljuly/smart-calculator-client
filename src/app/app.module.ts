@@ -21,7 +21,7 @@ import { ResultComponent } from './page/section/result/result.component';
 import { DataService } from './_services/data.service';
 import { ComunicationService } from './_services';
 import { AlertService, AuthenticationService, UserService } from './_services';
-import { MockBackendInterceptor } from './_helpers';
+// import { MockBackendInterceptor } from './_helpers';
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -68,7 +68,7 @@ import { SignComponent } from './page/header/sign';
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true },
     { provide: APP_BASE_HREF, useValue: '/' },
     DataService,
     ComunicationService

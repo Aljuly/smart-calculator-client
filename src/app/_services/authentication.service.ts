@@ -10,7 +10,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`http://localhost:3000/users/authenticate`, { username: username, password: password })
+    return this.http.post<any>(`http://localhost:8080/smart-calculator/users/login`, { username: username, password: password })
       .pipe(map(res => {
         // Check the detailed reference in the chapter "JsonConvert class properties and methods"
         this.jsonConvert = new JsonConvert();
@@ -18,9 +18,9 @@ export class AuthenticationService {
         this.jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
         // json converter returns an Array!
         console.log(JSON.stringify(res));
-        // const user = this.jsonConvert.deserialize(JSON.stringify(res), User)[0];
-        const user = res;
-        console.log(user.login + ' is authenticated!');
+        const user = this.jsonConvert.deserialize(res, User);
+        // const user = res;
+        console.log(user.username + ' is authenticated!');
         // login successful if there's a jwt token in the response
         if (!user.isEmpty && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes

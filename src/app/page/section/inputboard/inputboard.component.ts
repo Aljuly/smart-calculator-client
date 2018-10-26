@@ -64,28 +64,28 @@ export class InputBoardComponent implements OnInit {
       .subscribe((res: any) => {
         // depends on selected operation type read corresponding responce
         switch (res.id) {
-          case 1: {
+          case 100000: {
             this.additionResult = this.jsonConvert.deserialize(res, AdditionResult);
             this.additionResult.setAddition();
             // broadcast result
             this.comunicationService.changeAdditionResult(this.additionResult);
             break;
           }
-          case 2: {
+          case 100001: {
             this.additionResult = this.jsonConvert.deserialize(res, AdditionResult);
             this.additionResult.setSubtraction();
             // broadcast result
             this.comunicationService.changeAdditionResult(this.additionResult);
             break;
           }
-          case 3: {
+          case 100002: {
             this.multiplicationResult = this.jsonConvert.deserialize(res, MultiplicationResult);
             // broadcast result
             this.comunicationService.changeMultiplycationResult(this.multiplicationResult);
             break;
           }
-          case 4:
-          case 5: {
+          case 100003:
+          case 100004: {
             this.divisionResult = this.jsonConvert.deserialize(res, DivisionResult);
             // broadcast result
             this.comunicationService.changeDivisionResult(this.divisionResult);

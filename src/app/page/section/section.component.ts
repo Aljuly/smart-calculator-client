@@ -29,10 +29,10 @@ export class SectionComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       // Lookup on the server for selected operation description
       this.dataService
-      .get_description(params['id'] || 1)
+      .get_description(params['id'] || 100000)
       .subscribe((res: any) => {
         // json converter returns an Array!
-        const description = this.jsonConvert.deserialize(res, Description)[0];
+        const description = this.jsonConvert.deserialize(res, Description);
         console.log(description.id + ' broadcasted!');
         // Broadcast this description
         this.comunicationService.changeDescription(description);

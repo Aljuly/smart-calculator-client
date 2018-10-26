@@ -7,23 +7,27 @@ import { JsonObject, JsonProperty } from 'json2typescript';
  */
 @JsonObject('User')
 export class User {
-  @JsonProperty('name', String)
+  @JsonProperty('username', String)
   private _username: string;
-  @JsonProperty('login', String)
+  // @JsonProperty('login', String)
   private _login: string;
-  @JsonProperty('email', String)
+  // @JsonProperty('email', String)
   private _email: string;
-  @JsonProperty('token', String)
+  // @JsonProperty('password', String)
+  private _password: string;
+  @JsonProperty('jwt', String)
   private _token: string;
 
   constructor(
     username?: string,
     login?: string,
     email?: string,
-    token?: string ) {
+    password?: string,
+    token?: string) {
       this._username = username || void 0;
       this._login = login || void 0;
       this._email = email || void 0;
+      this._password = password ||  void 0;
       this._token = token ||  void 0;
     }
 
@@ -39,17 +43,25 @@ export class User {
   public set username(value: string) {
     this._username = value;
   }
-  public get token(): string {
-    return this._token;
+  public get password(): string {
+    return this._password;
   }
-  public set token(value: string) {
-    this._token = value;
+  public set password(value: string) {
+    this._password = value;
   }
   public get login(): string {
     return this._login;
   }
   public set login(value: string) {
     this._login = value;
+  }
+
+  public get token(): string {
+    return this._token;
+  }
+
+  public set token(value: string) {
+    this._token = value;
   }
 
   public isEmpty(): boolean {
