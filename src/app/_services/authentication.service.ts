@@ -22,7 +22,7 @@ export class AuthenticationService {
         // const user = res;
         console.log(user.username + ' is authenticated!');
         // login successful if there's a jwt token in the response
-        if (!user.isEmpty && user.token) {
+        if (user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
         }

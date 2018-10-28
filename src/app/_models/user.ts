@@ -65,6 +65,6 @@ export class User {
   }
 
   public isEmpty(): boolean {
-    return (this._username == null && this._email == null);
+    return (this._username == null && this._token == null);
   }
 }

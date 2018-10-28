@@ -1,19 +1,19 @@
 <article class = "output-data">
     <div style="text-align: center">
         <span [ngSwitch]="id">
-            <p *ngSwitchCase="1">
+            <p *ngSwitchCase="100000">
                 <app-addition-component [additionResult] = "additionResult"></app-addition-component>
             </p>
-            <p *ngSwitchCase="2">
+            <p *ngSwitchCase="100001">
                 <app-addition-component [additionResult] = "additionResult"></app-addition-component>
             </p>
-            <p *ngSwitchCase="3">
+            <p *ngSwitchCase="100002">
                 <app-multiplycation-formatter [multiplicationResult] = "multiplicationResult"></app-multiplycation-formatter>   
             </p>
-            <p *ngSwitchCase="4">
+            <p *ngSwitchCase="100003">
                 <app-division-formatter [divisionResult] = "divisionResult"></app-division-formatter>
             </p>
-            <p *ngSwitchCase="5">
+            <p *ngSwitchCase="100004">
                 <app-division-formatter [divisionResult] = "divisionResult"></app-division-formatter>
             </p>
         </span>
