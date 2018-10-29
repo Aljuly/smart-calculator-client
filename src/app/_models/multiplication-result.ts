@@ -9,13 +9,13 @@ import { JsonObject, JsonProperty } from 'json2typescript';
 export class MultiplicationResult {
     @JsonProperty('id', Number)
     private _id: number;
-    @JsonProperty('firstfactor', String)
+    @JsonProperty('firstTerm', String)
     private _firstFactor: string;
-    @JsonProperty('secondfactor', String)
+    @JsonProperty('secondTerm', String)
     private _secondFactor: string;
     @JsonProperty('product', String)
     private _product: string;
-    @JsonProperty('steps', [String])
+    @JsonProperty('calculationSteps', [String])
     private _steps: string[];
     constructor() {
         this._id = void 0;

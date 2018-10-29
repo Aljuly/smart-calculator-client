@@ -22,9 +22,9 @@ export class DivisionResult {
     private _alert: string;
     @JsonProperty('fraction', String)
     private _fraction: string;
-    @JsonProperty('steps', [Step])
+    @JsonProperty('calculationSteps', [Step])
     private _steps: Step[];
-
+    // The constructor
     constructor() {
         this._id = void 0;
         this._dividend = void 0;
@@ -36,6 +36,7 @@ export class DivisionResult {
         this._fraction = void 0;
         this._steps = void 0;
     }
+    // Getters and Setters
     public get id(): number {
         return this._id;
     }

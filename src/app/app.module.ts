@@ -31,6 +31,7 @@ import { DivisionFormatterComponent } from './page/section/result/division-forma
 import { MultiplycationFormatterComponent } from './page/section/result/multiplycation-formatter';
 import { AdditionComponent } from './page/section/result/addition-component';
 import { SignComponent } from './page/header/sign';
+import { SubtractionFormatterComponent } from './subtraction-formatter/subtraction-formatter.component';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { SignComponent } from './page/header/sign';
     DivisionFormatterComponent,
     MultiplycationFormatterComponent,
     AdditionComponent,
-    SignComponent
+    SignComponent,
+    SubtractionFormatterComponent
   ],
   providers: [
     AuthGuard,
@@ -74,6 +76,7 @@ import { SignComponent } from './page/header/sign';
     ComunicationService
   ],
   entryComponents: [LoginComponent, RegisterComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [SubtractionFormatterComponent]
 })
 export class AppModule {}

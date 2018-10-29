@@ -1,27 +1,29 @@
 import { JsonObject, JsonProperty } from 'json2typescript';
+
 /**
- * Class that strores info about addition operation result
+ * Class that strores info about subtraction operation result
  * @author Alexander Zhulinsky
- * @version 1.0 13 Aug 2018
+ * @version 1.0 29 Oct 2018
  */
-@JsonObject('AdditionResult')
-export class AdditionResult {
+@JsonObject('SubtractionResult')
+export class SubtractionResult {
     @JsonProperty('id', Number)
     private _id: number;
-    @JsonProperty('firstTerm', String)
+    @JsonProperty('menued', String)
     private _firstTerm: string;
-    @JsonProperty('secondTerm', String, )
+    @JsonProperty('subtrahent', String, )
     private _secondTerm: string;
-    @JsonProperty('sum', String, )
-    private _sum: string;
-    private _operationType: boolean;
+    @JsonProperty('difference', String, )
+    private _difference: string;
+    @JsonProperty('nagative', Boolean)
+    private _negative: boolean;
     // The constructor
     constructor() {
         this._id = void 0;
         this._firstTerm = void 0;
         this._secondTerm = void 0;
-        this._sum = void 0;
-        this._operationType = false;
+        this._difference = void 0;
+        this._negative = false;
     }
     // Getters and Settres
     public get id(): number {
@@ -42,27 +44,20 @@ export class AdditionResult {
     public set secondTerm(value: string) {
         this._secondTerm = value;
     }
-    public get sum(): string {
-        return this._sum;
+    public get difference(): string {
+        return this._difference;
     }
-    public set sum(value: string) {
-        this._sum = value;
+    public set difference(value: string) {
+        this._difference = value;
     }
-    // Set and Get data about contained operation data
-    public setAddition() {
-        this._operationType = false;
+    public get negative(): boolean {
+        return this._negative;
     }
-    public setSubtraction() {
-        this._operationType = true;
-    }
-    public isAddition(): boolean {
-        return !this._operationType;
-    }
-    public isSubtraction(): boolean {
-        return this._operationType;
+    public set negative(value: boolean) {
+        this._negative = value;
     }
     // Define whereas object is empty
     public isEmpty(): boolean {
-        return (this._firstTerm == null || this._secondTerm == null);
+        return (!this._firstTerm || !this._secondTerm);
     }
 }
