@@ -15,7 +15,7 @@ export class SubtractionResult {
     private _secondTerm: string;
     @JsonProperty('difference', String, )
     private _difference: string;
-    @JsonProperty('nagative', Boolean)
+    @JsonProperty('negative', Boolean)
     private _negative: boolean;
     // The constructor
     constructor() {

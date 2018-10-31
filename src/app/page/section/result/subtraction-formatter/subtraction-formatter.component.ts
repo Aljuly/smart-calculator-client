@@ -7,7 +7,7 @@ import { SubtractionResult } from '../../../../_models';
   styleUrls: ['./subtraction-formatter.component.css']
 })
 export class SubtractionFormatterComponent implements OnChanges {
-  @Input() subtaractionResult: SubtractionResult;
+  @Input() subtractionResult: SubtractionResult;
   firstTerm: string[];
   secondTerm: string[];
   difference: string[];
@@ -15,22 +15,22 @@ export class SubtractionFormatterComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    if (this.subtaractionResult.isEmpty()) { return; }
+    if (this.subtractionResult.isEmpty()) { return; }
     const m = Math.max(
-      this.subtaractionResult.firstTerm.length,
-      this.subtaractionResult.secondTerm.length);
-    const f = m - this.subtaractionResult.firstTerm.length;
-    const s = m - this.subtaractionResult.secondTerm.length;
-    let z = this.subtaractionResult.difference.length - m - 1;
+      this.subtractionResult.firstTerm.length,
+      this.subtractionResult.secondTerm.length);
+    const f = m - this.subtractionResult.firstTerm.length;
+    const s = m - this.subtractionResult.secondTerm.length;
+    let z = this.subtractionResult.difference.length - m - 1;
     let r = 0;
     if (z < 0) {
       r = -z;
       z = 0;
     }
     this.stub = Array.from(this.assemblyString(z, ' '));
-    this.firstTerm = Array.from(this.assemblyString(f, ' ').concat(this.subtaractionResult.firstTerm));
-    this.secondTerm = Array.from(this.assemblyString(s, ' ').concat(this.subtaractionResult.secondTerm));
-    this.difference = Array.from(this.assemblyString(r, ' ').concat(this.subtaractionResult.difference));
+    this.firstTerm = Array.from(this.assemblyString(f, ' ').concat(this.subtractionResult.firstTerm));
+    this.secondTerm = Array.from(this.assemblyString(s, ' ').concat(this.subtractionResult.secondTerm));
+    this.difference = Array.from(this.assemblyString(r, ' ').concat(this.subtractionResult.difference));
   }
   // Utility function that forms string from given char of given length
   private assemblyString(numberOfSymbols: number, symbol: string) {

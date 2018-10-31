@@ -88,9 +88,9 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         };
                         return of(new HttpResponse({ status: 200, body: body }));
                     }
-                    case 4: {
+                    case 100003: {
                         const body = {
-                            id: 4,
+                            id: 100003,
                             dividend: '630440',
                             divisor: '610',
                             quotient: '1033',
@@ -104,9 +104,9 @@ export class MockBackendInterceptor implements HttpInterceptor {
                         };
                         return of(new HttpResponse({ status: 200, body: body }));
                     }
-                    case 5: {
+                    case 100004: {
                         const body = {
-                            id: 5,
+                            id: 100004,
                             dividend: '12',
                             divisor: '123',
                             quotient: '0',

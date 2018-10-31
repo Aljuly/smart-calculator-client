@@ -31,7 +31,7 @@ import { DivisionFormatterComponent } from './page/section/result/division-forma
 import { MultiplycationFormatterComponent } from './page/section/result/multiplycation-formatter';
 import { AdditionComponent } from './page/section/result/addition-component';
 import { SignComponent } from './page/header/sign';
-import { SubtractionFormatterComponent } from './subtraction-formatter/subtraction-formatter.component';
+import { SubtractionFormatterComponent } from './page/section/result/subtraction-formatter';
 
 @NgModule({
   imports: [
@@ -70,7 +70,7 @@ import { SubtractionFormatterComponent } from './subtraction-formatter/subtracti
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true },
+   //  { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true },
     { provide: APP_BASE_HREF, useValue: '/' },
     DataService,
     ComunicationService

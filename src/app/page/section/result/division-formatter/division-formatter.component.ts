@@ -16,7 +16,12 @@ export class DivisionFormatterComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges() {
-    if (this.divisionResult.isEmpty()) { return; }
+    if (this.divisionResult.isEmpty()) {
+      console.log('Im Empty!!');
+      return;
+    } else {
+      console.log('Full!!');
+    }
     let j: number;
     let diff: number;
     let i = 1;

@@ -16,7 +16,7 @@ export class SignComponent implements OnInit {
       // Be ready to optain actual data
       this.comunicationService.userMessage.subscribe(user => {
         this.user = user;
-        this.signedIn = !user.isEmpty;
+        this.signedIn = !user.isEmpty();
       });
     }
     logout() {

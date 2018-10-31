@@ -63,6 +63,6 @@ export class AdditionResult {
     }
     // Define whereas object is empty
     public isEmpty(): boolean {
-        return (this._firstTerm == null || this._secondTerm == null);
+        return (!this._firstTerm || !this._secondTerm);
     }
 }

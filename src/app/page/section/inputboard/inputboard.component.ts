@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DataService } from '../../../_services/data.service';
 import { ComunicationService } from '../../../_services';
-import { Description, DivisionResult, MultiplicationResult, AdditionResult } from '../../../_models';
+import { Description, DivisionResult, MultiplicationResult, AdditionResult, SubtractionResult } from '../../../_models';
 import { JsonConvert, OperationMode } from 'json2typescript';
 
 @Component({
@@ -16,6 +16,7 @@ export class InputBoardComponent implements OnInit {
   firstnumber: string;
   secondnumber: string;
   additionResult: AdditionResult;
+  subtractionResult: SubtractionResult;
   multiplicationResult: MultiplicationResult;
   divisionResult: DivisionResult;
   jsonConvert: JsonConvert;
@@ -66,16 +67,14 @@ export class InputBoardComponent implements OnInit {
         switch (res.id) {
           case 100000: {
             this.additionResult = this.jsonConvert.deserialize(res, AdditionResult);
-            this.additionResult.setAddition();
             // broadcast result
             this.comunicationService.changeAdditionResult(this.additionResult);
             break;
           }
           case 100001: {
-            this.additionResult = this.jsonConvert.deserialize(res, AdditionResult);
-            this.additionResult.setSubtraction();
+            this.subtractionResult = this.jsonConvert.deserialize(res, SubtractionResult);
             // broadcast result
-            this.comunicationService.changeAdditionResult(this.additionResult);
+            this.comunicationService.changeSubtractionResult(this.subtractionResult);
             break;
           }
           case 100002: {

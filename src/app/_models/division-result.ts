@@ -22,7 +22,7 @@ export class DivisionResult {
     private _alert: string;
     @JsonProperty('fraction', String)
     private _fraction: string;
-    @JsonProperty('calculationSteps', [Step])
+    @JsonProperty('steps', [Step])
     private _steps: Step[];
     // The constructor
     constructor() {
@@ -87,6 +87,6 @@ export class DivisionResult {
     }
     // Define whereas object is empty
     public isEmpty(): boolean {
-        return (this._dividend == null || this._divisor == null);
+        return (!this._dividend || !this._divisor);
     }
 }
