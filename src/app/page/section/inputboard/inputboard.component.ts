@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DataService } from '../../../_services/data.service';
 import { ComunicationService } from '../../../_services';
-import { Description, DivisionResult, MultiplicationResult, AdditionResult, SubtractionResult } from '../../../_models';
+import { Description, DivisionResult, MultiplicationResult, AdditionResult, SubtractionResult, Result } from '../../../_models';
 import { JsonConvert, OperationMode } from 'json2typescript';
 
 @Component({
@@ -21,10 +21,10 @@ export class InputBoardComponent implements OnInit {
   divisionResult: DivisionResult;
   jsonConvert: JsonConvert;
   id: number;
+  result: Result;
   private numberValidator = '^[0-9]{1,6}$';
   constructor(
     private formBuilder: FormBuilder,
-    // private activatedRoute: ActivatedRoute,
     private data: DataService,
     private comunicationService: ComunicationService
   ) {}
@@ -69,18 +69,21 @@ export class InputBoardComponent implements OnInit {
             this.additionResult = this.jsonConvert.deserialize(res, AdditionResult);
             // broadcast result
             this.comunicationService.changeAdditionResult(this.additionResult);
+            this.result = this.additionResult;
             break;
           }
           case 100001: {
             this.subtractionResult = this.jsonConvert.deserialize(res, SubtractionResult);
             // broadcast result
             this.comunicationService.changeSubtractionResult(this.subtractionResult);
+            this.result = this.subtractionResult;
             break;
           }
           case 100002: {
             this.multiplicationResult = this.jsonConvert.deserialize(res, MultiplicationResult);
             // broadcast result
             this.comunicationService.changeMultiplycationResult(this.multiplicationResult);
+            this.result = this.multiplicationResult;
             break;
           }
           case 100003:
@@ -88,6 +91,7 @@ export class InputBoardComponent implements OnInit {
             this.divisionResult = this.jsonConvert.deserialize(res, DivisionResult);
             // broadcast result
             this.comunicationService.changeDivisionResult(this.divisionResult);
+            this.result = this.divisionResult;
             break;
           }
         }

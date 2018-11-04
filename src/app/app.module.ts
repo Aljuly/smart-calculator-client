@@ -32,6 +32,7 @@ import { MultiplycationFormatterComponent } from './page/section/result/multiply
 import { AdditionComponent } from './page/section/result/addition-component';
 import { SignComponent } from './page/header/sign';
 import { SubtractionFormatterComponent } from './page/section/result/subtraction-formatter';
+import { CommonResultComponent } from './page/section/inputboard/common-result/common-result.component';
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import { SubtractionFormatterComponent } from './page/section/result/subtraction
     MultiplycationFormatterComponent,
     AdditionComponent,
     SignComponent,
-    SubtractionFormatterComponent
+    SubtractionFormatterComponent,
+    CommonResultComponent
   ],
   providers: [
     AuthGuard,

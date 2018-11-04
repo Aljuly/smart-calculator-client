@@ -1,5 +1,6 @@
 import { Step, DivisionResult } from '../../../../_models';
 import { Component, Input, OnChanges } from '@angular/core';
+import { Formatter } from 'src/app/_helpers';
 
 @Component({
   selector: 'app-division-formatter',
@@ -13,14 +14,12 @@ export class DivisionFormatterComponent implements OnChanges {
   second: string[];
   stepsOut: any[];
   result: string[];
-  constructor() {}
+  constructor(private formatter: Formatter) {}
 
   ngOnChanges() {
     if (this.divisionResult.isEmpty()) {
       console.log('Im Empty!!');
       return;
-    } else {
-      console.log('Full!!');
     }
     let j: number;
     let diff: number;
@@ -35,10 +34,10 @@ export class DivisionFormatterComponent implements OnChanges {
     let f: number;
     let s: number;
     // assembly strings to output
-    this.second = Array.from(this.assemblyString(firstNumber.length - secondNumber.length, ' ')
+    this.second = Array.from(this.formatter.assemblyString(firstNumber.length - secondNumber.length, ' ')
       .concat(this.divisionResult.steps[0].secondnumber)
-      .concat(this.assemblyString(this.dividend.length - firstNumber.length, ' ')));
-    this.result = Array.from(this.divisionResult.quotient.concat(this.formatFraction(this.divisionResult.fraction,
+      .concat(this.formatter.assemblyString(this.dividend.length - firstNumber.length, ' ')));
+    this.result = Array.from(this.divisionResult.quotient.concat(this.formatter.formatFraction(this.divisionResult.fraction,
       Number(this.divisionResult.divisor))));
     let difference: string = this.divisionResult.steps[0].difference;
     j = firstNumber.length;
@@ -52,7 +51,7 @@ export class DivisionFormatterComponent implements OnChanges {
         j += firstNumber.length - String(diff).length;
         if (difference.length === 0) { j++; }
         const stepOut = {
-          firstnumber: Array.from(this.assemblyString(j - firstNumber.length + 1, ' ').concat(firstNumber)),
+          firstnumber: Array.from(this.formatter.assemblyString(j - firstNumber.length + 1, ' ').concat(firstNumber)),
           secondnumber: Array.from(''),
           stub: Array.from('')
         };
@@ -73,9 +72,9 @@ export class DivisionFormatterComponent implements OnChanges {
         diff = Number(difference);
         // one step to output
         const stepOut = {
-          firstnumber: Array.from(this.assemblyString(f, ' ').concat(firstNumber)),
-          secondnumber: Array.from(this.assemblyString(s, ' ').concat(secondNumber)),
-          stub: Array.from(this.assemblyString(j - m, ' '))
+          firstnumber: Array.from(this.formatter.assemblyString(f, ' ').concat(firstNumber)),
+          secondnumber: Array.from(this.formatter.assemblyString(s, ' ').concat(secondNumber)),
+          stub: Array.from(this.formatter.assemblyString(j - m, ' '))
         };
         this.stepsOut.push(stepOut);
       }
@@ -87,40 +86,5 @@ export class DivisionFormatterComponent implements OnChanges {
       str = ' ' + str.substring(1);
     }
     return str;
-  }
-  // Utility function that forms string from given char of given length
-  private assemblyString(numberOfSymbols: number, symbol: string) {
-    if (numberOfSymbols === 0) { return ''; }
-    let result = '';
-    for (let i = 0; i < numberOfSymbols; i++) {
-        result += symbol;
-    }
-    return result;
-  }
-  // formatting fraction with periodic part
-  private formatFraction(fraction: string, divisor: number) {
-    let denominator: number;
-    if (fraction.length === 0) { return ''; }
-    fraction = fraction.concat(' ');
-    if (divisor % 2 === 0) {
-      for (let nines = 1; nines < fraction.length; nines++) {
-        for (let zeros = 1; zeros + nines < fraction.length - nines; zeros++) {
-          denominator = Number(this.assemblyString(nines, '9')
-            .concat(this.assemblyString(zeros, '0')));
-          if (denominator % divisor === 0) {
-            return '.'.concat(fraction.substring(0, zeros),
-              '(', fraction.substring(zeros, zeros + nines), ')');
-          }
-        }
-      }
-    } else {
-      for (let nines = String(divisor).length; nines < fraction.length; nines++) {
-        denominator = Number(this.assemblyString(nines, '9'));
-        if (denominator % divisor === 0) {
-          return '.'.concat('(', fraction.substring(0, nines), ')');
-        }
-      }
-    }
-    return '.'.concat(fraction.substring(0, fraction.length - 1));
   }
 }

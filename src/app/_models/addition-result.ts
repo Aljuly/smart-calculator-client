@@ -1,13 +1,12 @@
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { Result } from './result';
 /**
  * Class that strores info about addition operation result
  * @author Alexander Zhulinsky
  * @version 1.0 13 Aug 2018
  */
 @JsonObject('AdditionResult')
-export class AdditionResult {
-    @JsonProperty('id', Number)
-    private _id: number;
+export class AdditionResult extends Result {
     @JsonProperty('firstTerm', String)
     private _firstTerm: string;
     @JsonProperty('secondTerm', String, )
@@ -17,19 +16,13 @@ export class AdditionResult {
     private _operationType: boolean;
     // The constructor
     constructor() {
-        this._id = void 0;
+        super();
         this._firstTerm = void 0;
         this._secondTerm = void 0;
         this._sum = void 0;
         this._operationType = false;
     }
     // Getters and Settres
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
-    }
     public get firstTerm(): string {
         return this._firstTerm;
     }

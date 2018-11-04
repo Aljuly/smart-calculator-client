@@ -1,4 +1,5 @@
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { Result } from './result';
 
 /**
  * Class that strores info about multiplication result
@@ -6,9 +7,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
  * @version 1.0 13 Aug 2018
  */
 @JsonObject('MultiplicationResult')
-export class MultiplicationResult {
-    @JsonProperty('id', Number)
-    private _id: number;
+export class MultiplicationResult extends Result {
     @JsonProperty('first', String)
     private _firstFactor: string;
     @JsonProperty('second', String)
@@ -18,19 +17,13 @@ export class MultiplicationResult {
     @JsonProperty('steps', [String])
     private _steps: string[];
     constructor() {
-        this._id = void 0;
+        super();
         this._firstFactor = void 0;
         this._secondFactor = void 0;
         this._product = void 0;
         this._steps = void 0;
     }
     // Getters and Settres
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
-    }
     public get steps(): string[] {
         return this._steps;
     }

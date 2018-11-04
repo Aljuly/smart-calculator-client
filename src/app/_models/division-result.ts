@@ -1,5 +1,6 @@
 import { Step } from './step';
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { Result } from './result';
 
 /**
  * Class that strores info about division result
@@ -7,9 +8,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
  * @version 1.0 13 Aug 2018
  */
 @JsonObject('DivisionResult')
-export class DivisionResult {
-    @JsonProperty('id', Number)
-    private _id: number;
+export class DivisionResult extends Result {
     @JsonProperty('dividend', String)
     private _dividend: string;
     @JsonProperty('divisor', String)
@@ -26,7 +25,7 @@ export class DivisionResult {
     private _steps: Step[];
     // The constructor
     constructor() {
-        this._id = void 0;
+        super();
         this._dividend = void 0;
         this._divisor = void 0;
         this._dividend = void 0;
@@ -37,12 +36,6 @@ export class DivisionResult {
         this._steps = void 0;
     }
     // Getters and Setters
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
-    }
     public set dividend(value: string) {
         this._dividend = value;
     }

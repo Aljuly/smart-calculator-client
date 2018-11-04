@@ -1,3 +1,4 @@
+import { Result } from './result';
 import { JsonObject, JsonProperty } from 'json2typescript';
 
 /**
@@ -6,9 +7,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
  * @version 1.0 29 Oct 2018
  */
 @JsonObject('SubtractionResult')
-export class SubtractionResult {
-    @JsonProperty('id', Number)
-    private _id: number;
+export class SubtractionResult extends Result {
     @JsonProperty('menued', String)
     private _firstTerm: string;
     @JsonProperty('subtrahent', String, )
@@ -19,19 +18,13 @@ export class SubtractionResult {
     private _negative: boolean;
     // The constructor
     constructor() {
-        this._id = void 0;
+        super();
         this._firstTerm = void 0;
         this._secondTerm = void 0;
         this._difference = void 0;
         this._negative = false;
     }
     // Getters and Settres
-    public get id(): number {
-        return this._id;
-    }
-    public set id(value: number) {
-        this._id = value;
-    }
     public get firstTerm(): string {
         return this._firstTerm;
     }
