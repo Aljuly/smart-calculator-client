@@ -11,9 +11,9 @@ import { ComunicationService } from 'src/app/_services';
 export class CommonResultComponent implements OnChanges {
   @Input() result: Result;
   private comunicationService: ComunicationService;
-  private output: string;
-  private numerator: string;
-  private denominator: string;
+  output: string;
+  numerator: string;
+  denominator: string;
   constructor(
     private formatter: Formatter
   ) { }
