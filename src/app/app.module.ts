@@ -24,7 +24,7 @@ import { AlertService, AuthenticationService, UserService } from './_services';
 // import { MockBackendInterceptor } from './_helpers';
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { JwtInterceptor, ErrorInterceptor, Formatter } from './_helpers';
 import { LoginComponent, LoginModalComponent } from './login';
 import { RegisterComponent, RegisterModalComponent } from './register';
 import { DivisionFormatterComponent } from './page/section/result/division-formatter';
@@ -75,7 +75,8 @@ import { CommonResultComponent } from './page/section/inputboard/common-result/c
    //  { provide: HTTP_INTERCEPTORS, useClass: MockBackendInterceptor, multi: true },
     { provide: APP_BASE_HREF, useValue: '/' },
     DataService,
-    ComunicationService
+    ComunicationService,
+    Formatter
   ],
   entryComponents: [LoginComponent, RegisterComponent],
   bootstrap: [AppComponent],

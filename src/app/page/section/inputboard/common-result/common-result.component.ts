@@ -19,7 +19,13 @@ export class CommonResultComponent implements OnChanges {
   ) { }
 
   ngOnChanges() {
+    // if nothing to show then exit
     if (this.result.isEmpty()) { return; }
+    // reset previous values
+    this.output = '';
+    this.numerator = '';
+    this.denominator = '';
+    // fill with new values
     switch (true) {
       case (this.result instanceof AdditionResult): {
         this.output = (<AdditionResult>this.result).sum;

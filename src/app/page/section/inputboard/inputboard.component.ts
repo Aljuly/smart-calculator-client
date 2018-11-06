@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DataService } from '../../../_services/data.service';
-import { ComunicationService } from '../../../_services';
+import { ComunicationService, AlertService } from '../../../_services';
 import { Description, DivisionResult, MultiplicationResult, AdditionResult, SubtractionResult, Result } from '../../../_models';
 import { JsonConvert, OperationMode } from 'json2typescript';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-inputboard',
@@ -15,22 +16,24 @@ export class InputBoardComponent implements OnInit {
   submitted = false;
   firstnumber: string;
   secondnumber: string;
+  result: Result;
   additionResult: AdditionResult;
   subtractionResult: SubtractionResult;
   multiplicationResult: MultiplicationResult;
   divisionResult: DivisionResult;
   jsonConvert: JsonConvert;
   id: number;
-  result: Result;
   private numberValidator = '^[0-9]{1,6}$';
   constructor(
     private formBuilder: FormBuilder,
     private data: DataService,
+    private alertService: AlertService,
     private comunicationService: ComunicationService
   ) {}
   ngOnInit() {
     this.comunicationService.DescriptionMessage.subscribe((res) => {
       this.id = res.id;
+      this.result = new AdditionResult();
     });
     // Check the detailed reference in the chapter "JsonConvert class properties and methods"
     this.jsonConvert = new JsonConvert();
@@ -62,7 +65,8 @@ export class InputBoardComponent implements OnInit {
     // Make Http request
     this.data
       .get_result(this.id, this.f.firstnumber.value, this.f.secondnumber.value)
-      .subscribe((res: any) => {
+      .subscribe(
+        (res: any) => {
         // depends on selected operation type read corresponding responce
         switch (res.id) {
           case 100000: {
@@ -95,6 +99,10 @@ export class InputBoardComponent implements OnInit {
             break;
           }
         }
+      },
+      (error: any) => {
+        console.log(error); // log to console instead
+        this.alertService.error(error.message);
       });
   }
 }

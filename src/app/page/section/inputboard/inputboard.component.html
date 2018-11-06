@@ -28,14 +28,18 @@
               <div *ngIf="f.secondnumber.errors.pattern">Entered value not valid</div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-md-auto">
           <button class="btn btn-primary" type="submit" value="submit" >
             <i class="fas fa-equals"></i>
           </button>
         </div>
+        <div class="col-md-auto">
+          <app-common-result [result] = "result"></app-common-result>
+        </div>
       </div>
+      
       <div class="row">
-        <div class="clo-3">
+        <div class="col-3">
           <button class="btn btn-primary" (click)="onResetClick()">Clear</button>
         </div>
       </div>
