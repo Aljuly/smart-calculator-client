@@ -53,6 +53,8 @@ export class InputBoardComponent implements OnInit {
   // formreset
   onResetClick(): void {
     this.inputForm.reset();
+    // Clear alerts
+    this.alertService.clear();
   }
 
   // Send request to the calculation service
@@ -62,6 +64,8 @@ export class InputBoardComponent implements OnInit {
     if (this.inputForm.invalid) {
       return;
     }
+    // Clear alerts
+    this.alertService.clear();
     // Make Http request
     this.data
       .get_result(this.id, this.f.firstnumber.value, this.f.secondnumber.value)
@@ -100,9 +104,8 @@ export class InputBoardComponent implements OnInit {
           }
         }
       },
-      (error: any) => {
-        console.log(error); // log to console instead
-        this.alertService.error(error.message);
+      error => {
+        this.alertService.error(error);
       });
   }
 }

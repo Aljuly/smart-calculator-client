@@ -1,5 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AlertService } from '.';
+import { Result } from '../_models';
 
 @Injectable()
 export class DataService {
@@ -16,7 +21,20 @@ export class DataService {
     const params = new HttpParams()
     .set('id', String(id)).set('firstnumber', firstNumber)
     .set('secondnumber', secondNumber);
-    return this.httpClient.request('GET', this.baseUrl + '/calculations/calculate', {responseType: 'json', params});
+    return this.httpClient.request<any>('GET', this.baseUrl + '/calculations/calculate', {responseType: 'json', params})
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: string) {
+    // The backend returned an unsuccessful response code.
+    // The response body may contain clues as to what went wrong,
+    // console.error(`Backend returned error: ` + error);
+    // this.alertService.error(error);
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened. ' + error);
   }
 }
 

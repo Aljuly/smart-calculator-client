@@ -14,10 +14,12 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status === 401) {
         // auto logout if 401 response returned from api
         this.authenticationService.logout();
-        location.reload(true);
+        // location.reload(true);
       }
-
-      const error = err.error.message || err.statusText;
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(err.error, 'text/html');
+      const error = htmlDoc.getElementsByTagName('p').item(1).innerText;
+      // err.error.message || err.statusText;
       return throwError(error);
     }));
   }
